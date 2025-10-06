@@ -1,0 +1,54 @@
+{% extends "inicio/base.html" %}
+{% block title %}Contacto{% endblock %}
+{% load static %}
+{% block content %}
+<section class="contact-section">
+  <div class="contact-header">
+    <h1 class="title">Contacto Intergaláctico</h1>
+    <p class="subtitle">
+      ¿Tienes dudas, sugerencias o deseas unirte al equipo de desarrollo?
+      ¡Envíanos un mensaje desde cualquier rincón del universo!
+    </p>
+  </div>
+
+  {% if sent %}
+    <div class="contact-success animate-fade">
+      <h2>🚀 ¡Mensaje enviado!</h2>
+      <p>Gracias por contactarnos, responderemos lo antes posible.</p>
+    </div>
+  {% endif %}
+
+  <div class="contact-container">
+    <div class="contact-form">
+      <form method="post" novalidate>
+        {% csrf_token %}
+        <div class="form-group">
+          <label for="id_name">Nombre</label>
+          {{ form.name }}
+        </div>
+        <div class="form-group">
+          <label for="id_email">Correo Electrónico</label>
+          {{ form.email }}
+        </div>
+        <div class="form-group">
+          <label for="id_message">Mensaje</label>
+          {{ form.message }}
+        </div>
+        <button type="submit" class="btn-send">
+          <span>Enviar Mensaje</span>
+          <i class="fas fa-paper-plane"></i>
+        </button>
+      </form>
+    </div>
+
+    <div class="contact-info">
+      <h3>O comunícate directamente:</h3>
+      <ul>
+        <li><i class="fas fa-envelope"></i> contacto@estrellaerrante.com</li>
+        <li><i class="fas fa-phone"></i> +52 555 555 5555</li>
+        <li><i class="fas fa-map-marker-alt"></i> Sector 9, Nebulosa de Orión</li>
+      </ul>
+    </div>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,66 @@
+{% extends "inicio/base.html" %}
+{% block title %}Inicio {% endblock %}
+
+{% block content %}
+<div class="hero">
+  <div class="hero-text">
+    <h1 class="title">loya</h1>
+    <p class="subtitle">Embárcate en un viaje intergaláctico lleno de misterio, aventuras y decisiones que marcarán tu destino.</p>
+  </div>
+</div>
+
+<!-- Historia -->
+<section class="history-section">
+  <h2 class="section-title">Historia del Juego</h2>
+  <p class="history-text">{{ history }}</p>
+</section>
+
+<!-- Personajes -->
+<section class="characters-section">
+  <h2 class="section-title">Personajes</h2>
+  <div class="characters-grid">
+    {% for c in characters %}
+      <div class="character-card animate-fade">
+        <div class="card-header">
+          <h3>{{ c.name }}</h3>
+          <span class="role">{{ c.role }}</span>
+        </div>
+        <p class="desc">{{ c.desc }}</p>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+<section class="gameplay-section">
+  <h2 class="section-title">Mecánicas del Juego</h2>
+  <div class="gameplay-cards">
+    <div class="gameplay-card">
+      <h3>Exploración</h3>
+      <p>Descubre planetas y secretos ocultos en cada misión.</p>
+    </div>
+    <div class="gameplay-card">
+      <h3>Batallas Espaciales</h3>
+      <p>Enfréntate a enemigos en combates estratégicos.</p>
+    </div>
+    <div class="gameplay-card">
+      <h3>Decisiones</h3>
+      <p>Cada decisión afectará la historia y los finales posibles.</p>
+    </div>
+  </div>
+</section>
+<section class="updates-section">
+  <h2 class="section-title">Últimas Noticias</h2>
+  <ul class="updates-list">
+    <li>Nuevo planeta desbloqueado en la actualización 1.2</li>
+    <li>Evento especial de Halloween disponible hasta el 31 de octubre</li>
+    <li>Mejoras en las animaciones de combate y personajes</li>
+  </ul>
+</section>
+<section class="video-section">
+  <h2 class="section-title">Trailer del Juego</h2>
+  <div class="video-container">
+    <iframe width="100%" height="400" src="https://www.youtube.com/embed/VIDEO_ID" title="Trailer del juego" frameborder="0" allowfullscreen></iframe>
+  </div>
+</section>
+
+{% endblock %}
+

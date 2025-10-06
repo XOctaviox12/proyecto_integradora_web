@@ -1,0 +1,61 @@
+{% extends "inicio/base.html" %}
+{% block title %}Equipo Creativo{% endblock %}
+{% load static %}
+{% block content %}
+<!-- Fondo animado de estrellas -->
+<div class="stars"></div>
+<div class="twinkling"></div>
+
+<section class="creators-section">
+  <div class="intro">
+    <h1 class="title">Equipo Creativo</h1>
+    <p class="subtitle">
+      Conoce al equipo detrás de <strong>Estrella Errante</strong>, soñadores, artistas y desarrolladores
+      que convirtieron la imaginación en una galaxia interactiva. 🚀
+    </p>
+  </div>
+
+  <div class="creators-grid">
+    {% for p in creators %}
+      <div class="creator-card animate-up">
+        <div class="creator-avatar">
+          {% if p.image %}
+            <img src="{{ p.image.url }}" alt="{{ p.name }}">
+          {% else %}
+            <img src="{% static 'images/default-avatar.png' %}" alt="Avatar genérico">
+          {% endif %}
+        </div>
+        <div class="creator-info">
+          <h3 class="creator-name">{{ p.name }}</h3>
+          <p class="creator-role">{{ p.role }}</p>
+          <p class="creator-bio">{{ p.bio }}</p>
+
+          {% if p.twitter or p.github or p.instagram %}
+          <div class="social-links">
+            {% if p.twitter %}
+              <a href="{{ p.twitter }}" target="_blank" class="social-icon twitter" title="Twitter">🐦</a>
+            {% endif %}
+            {% if p.github %}
+              <a href="{{ p.github }}" target="_blank" class="social-icon github" title="GitHub">💻</a>
+            {% endif %}
+            {% if p.instagram %}
+              <a href="{{ p.instagram }}" target="_blank" class="social-icon instagram" title="Instagram">📸</a>
+            {% endif %}
+          </div>
+          {% endif %}
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+
+  <!-- NUEVA SECCIÓN -->
+  <section class="vision-section animate-up">
+    <h2>Nuestra Visión</h2>
+    <p>
+      Crear experiencias interactivas que inspiren, emocionen y conecten a las personas a través del arte digital,
+      la narrativa y la tecnología. En <strong>Estrella Errante</strong> creemos que cada historia puede ser
+      un universo por descubrir.
+    </p>
+  </section>
+</section>
+{% endblock %}
