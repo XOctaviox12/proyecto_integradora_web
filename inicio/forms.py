@@ -1,25 +1,22 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import User
+from .models import Explorador
 from django.core.exceptions import ValidationError
 
-
-# --- Formulario de contacto (ya lo tenías) ---
 class ContactForm(forms.Form):
     name = forms.CharField(label="Nombre", max_length=100)
     email = forms.EmailField(label="Correo")
     message = forms.CharField(label="Mensaje", widget=forms.Textarea)
 
-# --- Formulario de registro nuevo ---
+
 class RegistroForm(forms.ModelForm):
-    password1 = forms.CharField(
+    contraseña1 = forms.CharField(
         label="Contraseña",
         widget=forms.PasswordInput(attrs={
             "class": "form-control cosmic-input",
             "placeholder": "••••••••"
         })
     )
-    password2 = forms.CharField(
+    contraseña2 = forms.CharField(
         label="Confirmar Contraseña",
         widget=forms.PasswordInput(attrs={
             "class": "form-control cosmic-input",
@@ -28,29 +25,30 @@ class RegistroForm(forms.ModelForm):
     )
 
     class Meta:
-        model = User
-        fields = ["username", "email"]
+        model = Explorador
+        fields = ["nombre", "correo"]
         widgets = {
-            "username": forms.TextInput(attrs={
+            "nombre": forms.TextInput(attrs={
                 "class": "form-control cosmic-input",
-                "placeholder": "Nombre de usuario"
+                "placeholder": "Nombre completo"
             }),
-            "email": forms.EmailInput(attrs={
+            "correo": forms.EmailInput(attrs={
                 "class": "form-control cosmic-input",
                 "placeholder": "correo@galaxia.com"
             }),
         }
 
-    def clean_password2(self):
-        password1 = self.cleaned_data.get("password1")
-        password2 = self.cleaned_data.get("password2")
-        if password1 and password2 and password1 != password2:
+    def clean(self):
+        cleaned_data = super().clean()
+        p1 = cleaned_data.get("contraseña1")
+        p2 = cleaned_data.get("contraseña2")
+        if p1 and p2 and p1 != p2:
             raise ValidationError("⚠️ Las contraseñas no coinciden.")
-        return password2
+        return cleaned_data
 
     def save(self, commit=True):
-        user = super().save(commit=False)
-        user.set_password(self.cleaned_data["password1"])
+        explorador = super().save(commit=False)
+        explorador.contraseña = self.cleaned_data["contraseña1"]
         if commit:
-            user.save()
-        return user
+            explorador.save()
+        return explorador
