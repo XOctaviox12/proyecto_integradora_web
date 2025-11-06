@@ -1,0 +1,156 @@
+{% extends "inicio/base.html" %}
+{% block title %}Registro{% endblock %}
+{% load static %}
+
+{% block content %}
+<section class="register-section">
+  <div class="register-header">
+    <h1 class="title">🪐 Registro de Exploradores</h1>
+    <p class="subtitle">Únete a la tripulación de la Estrella Errante y vive aventuras cósmicas.</p>
+  </div>
+
+  {% if registrado %}
+    <div class="success-message animate-fade">
+      <h2>🚀 Registro completado</h2>
+      <p>Tu cuenta ha sido creada correctamente. ¡Bienvenido a bordo, explorador!</p>
+    </div>
+  {% endif %}
+
+  <div class="register-container">
+    <form method="post" novalidate>
+      {% csrf_token %}
+      {% if form.errors %}
+        <div class="error-box">
+          <ul>
+            {% for field in form %}
+              {% for error in field.errors %}
+                <li>{{ error }}</li>
+              {% endfor %}
+            {% endfor %}
+            {% for error in form.non_field_errors %}
+              <li>{{ error }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+      {% endif %}
+
+      <div class="form-group">
+        <label for="id_username">Nombre de usuario</label>
+        {{ form.username }}
+      </div>
+      <div class="form-group">
+        <label for="id_email">Correo electrónico</label>
+        {{ form.email }}
+      </div>
+      <div class="form-group">
+        <label for="id_password1">Contraseña</label>
+        {{ form.password1 }}
+      </div>
+      <div class="form-group">
+        <label for="id_password2">Confirmar contraseña</label>
+        {{ form.password2 }}
+      </div>
+
+      <button type="submit" class="btn-send">
+        <span>Registrarme</span>
+        <i class="fas fa-user-plus"></i>
+      </button>
+    </form>
+  </div>
+</section>
+
+<style>
+  .register-section {
+    padding: 3rem;
+    color: #e0f7fa;
+    text-align: center;
+    background: radial-gradient(circle at top, #0a0a15 30%, #0c1a2b 100%);
+  }
+
+  .register-header .title {
+    font-size: 2.3rem;
+    text-shadow: 0 0 15px #00fff2;
+    color: #00fff2;
+  }
+
+  .subtitle {
+    color: #9be7ff;
+    margin-bottom: 2rem;
+  }
+
+  .register-container {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    padding: 2rem;
+    max-width: 450px;
+    margin: 0 auto;
+    box-shadow: 0 0 25px rgba(0, 255, 242, 0.2);
+    backdrop-filter: blur(10px);
+  }
+
+  .form-group {
+    text-align: left;
+    margin-bottom: 1.2rem;
+  }
+
+  label {
+    display: block;
+    font-weight: bold;
+    color: #00fff2;
+    margin-bottom: 0.4rem;
+  }
+
+  .cosmic-input {
+    width: 100%;
+    padding: 0.7rem;
+    border-radius: 8px;
+    border: 1px solid rgba(0, 255, 255, 0.3);
+    background: rgba(10, 20, 40, 0.8);
+    color: #e0f7fa;
+    outline: none;
+    transition: 0.3s;
+  }
+
+  .cosmic-input:focus {
+    border-color: #00fff2;
+    box-shadow: 0 0 8px #00fff2;
+  }
+
+  .btn-send {
+    background: linear-gradient(90deg, #00fff2, #008cff);
+    color: #0a0a15;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+    width: 100%;
+  }
+
+  .btn-send:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px #00fff2;
+  }
+
+  .error-box {
+    background: rgba(255, 50, 50, 0.15);
+    border: 1px solid rgba(255, 100, 100, 0.3);
+    color: #ff6b6b;
+    border-radius: 10px;
+    padding: 0.8rem 1rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
+  }
+
+  .success-message {
+    background: rgba(0, 255, 150, 0.15);
+    border: 1px solid rgba(0, 255, 150, 0.4);
+    color: #00ffb3;
+    border-radius: 10px;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 0 15px rgba(0, 255, 150, 0.3);
+  }
+</style>
+{% endblock %}
