@@ -15,7 +15,7 @@ SECRET_KEY = 'django-insecure-l34_qu3dw&%3b+@m^#l_i5(o0sgsd%e=owg!cc4)xph2f%8ohr
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['facebomb.onrender.com', 'localhost', '127.0.0.1']
 
 
 # Application definition
