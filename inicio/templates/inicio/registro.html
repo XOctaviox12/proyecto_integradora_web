@@ -9,6 +9,14 @@
     <p class="subtitle">Únete a la tripulación de la Estrella Errante y vive aventuras cósmicas.</p>
   </div>
 
+  {% if messages %}
+    {% for message in messages %}
+      <div class="{% if message.tags == 'success' %}success-message{% else %}error-box{% endif %} animate-fade">
+        {{ message }}
+      </div>
+    {% endfor %}
+  {% endif %}
+
   {% if registrado %}
     <div class="success-message animate-fade">
       <h2>🚀 Registro completado</h2>
@@ -19,6 +27,7 @@
   <div class="register-container">
     <form method="post" novalidate>
       {% csrf_token %}
+      
       {% if form.errors %}
         <div class="error-box">
           <ul>
@@ -35,20 +44,20 @@
       {% endif %}
 
       <div class="form-group">
-        <label for="id_username">Nombre de usuario</label>
-        {{ form.username }}
+        <label for="id_nombre">Nombre completo</label>
+        {{ form.nombre }}
       </div>
       <div class="form-group">
-        <label for="id_email">Correo electrónico</label>
-        {{ form.email }}
+        <label for="id_correo">Correo electrónico</label>
+        {{ form.correo }}
       </div>
       <div class="form-group">
-        <label for="id_password1">Contraseña</label>
-        {{ form.password1 }}
+        <label for="id_contraseña1">Contraseña</label>
+        {{ form.contraseña1 }}
       </div>
       <div class="form-group">
-        <label for="id_password2">Confirmar contraseña</label>
-        {{ form.password2 }}
+        <label for="id_contraseña2">Confirmar contraseña</label>
+        {{ form.contraseña2 }}
       </div>
 
       <button type="submit" class="btn-send">
