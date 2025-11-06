@@ -1,0 +1,636 @@
+/* ==== RESET ==== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ==== BODY & BACKGROUND ==== */
+body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(-45deg, #050510, #0a0a1a, #0d0d2e, #1a1a40);
+  background-size: 400% 400%;
+  animation: gradientBG 30s ease infinite;
+  color: #fff;
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+/* Fondo dinámico de gradiente */
+@keyframes gradientBG {
+  0% {background-position: 0% 50%;}
+  50% {background-position: 100% 50%;}
+  100% {background-position: 0% 50%;}
+}
+
+/* ==== ESTRELLAS ANIMADAS ==== */
+#bg-anim {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  overflow: hidden;
+  z-index: -1;
+}
+
+/* Capa de estrellas */
+/* ==== ESTRELLAS ANIMADAS ==== */
+#bg-anim {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  overflow: hidden;
+  z-index: -1;
+}
+
+/* Capa de estrellas (más estrellas, más grandes, movimiento más rápido) */
+/* ==== ESTRELLAS ANIMADAS ==== */
+#bg-anim {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  overflow: hidden;
+  z-index: -1;
+}
+
+/* Capa de estrellas (el doble, más grandes, movimiento más rápido) */
+/* ==== FONDO DE ESTRELLAS ==== */
+#bg-anim {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  overflow: hidden;
+  z-index: -1;
+  background: radial-gradient(circle at top, #0a0a15, #000); /* fondo oscuro */
+}
+
+/* Estrellas principales */
+#bg-anim::before, #bg-anim::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 200%; height: 200%;
+  background-image: 
+    radial-gradient(4px 4px at 20px 30px, #fff, transparent),
+    radial-gradient(3px 3px at 50px 60px, #fff, transparent),
+    radial-gradient(5px 5px at 100px 80px, #fff, transparent),
+    radial-gradient(2px 2px at 130px 110px, #fff, transparent),
+    radial-gradient(4px 4px at 200px 150px, #fff, transparent),
+    radial-gradient(3px 3px at 250px 180px, #fff, transparent),
+    radial-gradient(5px 5px at 400px 300px, #fff, transparent),
+    radial-gradient(4px 4px at 450px 350px, #fff, transparent),
+    radial-gradient(3px 3px at 700px 500px, #fff, transparent),
+    radial-gradient(5px 5px at 750px 550px, #fff, transparent),
+    radial-gradient(4px 4px at 900px 700px, #fff, transparent),
+    radial-gradient(3px 3px at 950px 750px, #fff, transparent),
+    radial-gradient(5px 5px at 1200px 900px, #fff, transparent),
+    radial-gradient(4px 4px at 1250px 950px, #fff, transparent),
+    radial-gradient(3px 3px at 1500px 1200px, #fff, transparent),
+    radial-gradient(5px 5px at 1550px 1250px, #fff, transparent),
+    radial-gradient(4px 4px at 1800px 1400px, #fff, transparent),
+    radial-gradient(3px 3px at 1850px 1450px, #fff, transparent),
+    radial-gradient(5px 5px at 2000px 1600px, #fff, transparent),
+    radial-gradient(4px 4px at 2050px 1650px, #fff, transparent);
+  background-repeat: repeat;
+  opacity: 0.85; /* más visibles */
+  animation: moveStars 40s linear infinite; /* más rápido */
+}
+
+#bg-anim::after {
+  transform: scale(2);
+  opacity: 0.5;
+  animation-duration: 70s; /* capa secundaria más dinámica */
+}
+
+/* Movimiento de estrellas */
+@keyframes moveStars {
+  from { transform: translateY(0); }
+  to { transform: translateY(-800px); } /* recorrido más grande */
+}
+
+/* ==== ESTRELLAS FUGACES ==== */
+.shooting-star {
+  position: absolute;
+  width: 2px;
+  height: 80px;
+  background: linear-gradient(white, transparent);
+  opacity: 0;
+  transform: rotate(45deg);
+  animation: shootingStar 3s linear infinite;
+  animation-delay: calc(var(--i) * 2s);
+}
+
+@keyframes shootingStar {
+  0% {
+    transform: translate(-100vw, 0) rotate(45deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(100vw, 500px) rotate(45deg);
+    opacity: 0;
+  }
+}
+
+
+/* ==== HEADER ==== */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(6px);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+header a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.2rem;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+header a:hover {
+  color: #ffcc00;
+}
+
+nav a {
+  margin-left: 1.5rem;
+}
+
+/* ==== HERO ==== */
+.hero {
+  text-align: center;
+  padding: 5rem 2rem;
+}
+.title {
+  font-size: 3rem;
+  font-weight: 800;
+  text-shadow: 0 0 15px #fff, 0 0 30px #0ff;
+  animation: fadeInDown 1s ease;
+}
+.subtitle {
+  font-size: 1.2rem;
+  max-width: 700px;
+  margin: 1rem auto 0;
+  line-height: 1.6;
+  animation: fadeInUp 1.5s ease;
+}
+
+/* ==== SECCIÓN HISTORIA ==== */
+.history-section {
+  max-width: 900px;
+  margin: 3rem auto;
+  padding: 2rem;
+  background: rgba(255,255,255,0.05);
+  border-radius: 20px;
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.15);
+  animation: fadeInUp 1.2s ease;
+}
+.history-text {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  text-align: justify;
+  color: #eee;
+}
+
+/* ==== PERSONAJES ==== */
+.characters-section {
+  padding: 3rem 2rem;
+}
+.section-title {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  animation: pulse 2s infinite;
+}
+.characters-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 2rem;
+}
+.character-card {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  padding: 1.5rem;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  animation: float 6s ease-in-out infinite;
+}
+.character-card:hover {
+  transform: translateY(-10px) scale(1.05);
+  box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+}
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.card-header h3 {
+  margin: 0;
+  font-size: 1.4rem;
+  color: #fff;
+}
+.role {
+  background: #0ff;
+  color: #000;
+  padding: 0.3rem 0.6rem;
+  border-radius: 12px;
+  font-size: 0.8rem;
+}
+.desc {
+  margin-top: 1rem;
+  font-size: 0.95rem;
+  color: #ddd;
+  line-height: 1.4;
+}
+
+/* ==== FOOTER ==== */
+html, body {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+main { flex: 1; }
+.footer {
+  text-align: center;
+  padding: 1rem;
+  background: rgba(0,0,0,0.8);
+  backdrop-filter: blur(8px);
+  font-size: 0.9rem;
+  color: #ccc;
+  border-top: 1px solid rgba(255,255,255,0.2);
+  position: relative;
+  bottom: 0;
+  width: 100%;
+}
+
+/* ==== ANIMACIONES ==== */
+@keyframes fadeInDown {
+  from {opacity: 0; transform: translateY(-30px);}
+  to {opacity: 1; transform: translateY(0);}
+}
+@keyframes fadeInUp {
+  from {opacity: 0; transform: translateY(30px);}
+  to {opacity: 1; transform: translateY(0);}
+}
+@keyframes float {
+  0%, 100% {transform: translateY(0);}
+  50% {transform: translateY(-15px);}
+}
+@keyframes pulse {
+  0%, 100% {text-shadow: 0 0 10px #0ff, 0 0 20px #00f;}
+  50% {text-shadow: 0 0 20px #fff, 0 0 40px #0ff;}
+}
+.gameplay-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.gameplay-card {
+  background: rgba(255,255,255,0.08);
+  padding: 1.5rem;
+  border-radius: 16px;
+  backdrop-filter: blur(10px);
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.gameplay-card:hover {
+  transform: translateY(-10px) scale(1.05);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.gameplay-card h3 {
+  color: #ffcc00;
+  margin-bottom: 0.5rem;
+}
+
+.gameplay-card p {
+  color: #ddd;
+  font-size: 0.95rem;
+}
+.updates-list {
+  list-style: none;
+  padding-left: 0;
+  max-width: 800px;
+  margin: 1rem auto;
+}
+
+.updates-list li {
+  background: rgba(255,255,255,0.06);
+  padding: 1rem;
+  border-radius: 12px;
+  margin-bottom: 0.8rem;
+  border-left: 4px solid #ffcc00;
+  transition: background 0.3s;
+}
+
+.updates-list li:hover {
+  background: rgba(255,255,255,0.12);
+}
+.video-container {
+  max-width: 900px;
+  margin: 2rem auto;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.7);
+}
+
+
+
+
+
+
+
+/* ==== SECCIÓN DE CREADORES ==== */
+.creators-section {
+  padding: 60px 20px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.creators-section h1 {
+  font-size: 2.8rem;
+  margin-bottom: 40px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: #00b3ff;
+  text-shadow: 0 0 15px rgba(0, 179, 255, 0.6);
+}
+
+.creators-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 30px;
+  justify-content: center;
+  align-items: stretch;
+  perspective: 1000px;
+}
+
+/* ==== TARJETAS DE CREADORES ==== */
+.creator-card {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 16px;
+  padding: 20px;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  animation: softFade 0.8s ease forwards;
+  opacity: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* ==== IMÁGENES DE CREADORES ==== */
+.creator-card img {
+  width: 120px;              /* Tamaño moderado y proporcional */
+  height: 120px;
+  object-fit: cover;         /* Mantiene proporción sin deformar */
+  border-radius: 50%;        /* Forma circular elegante */
+  border: 3px solid rgba(0, 179, 255, 0.5);
+  box-shadow: 0 0 15px rgba(0, 179, 255, 0.3);
+  margin-bottom: 15px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.creator-card:hover img {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px rgba(0, 179, 255, 0.5);
+}
+
+/* ==== TEXTO ==== */
+.creator-card h3 {
+  font-size: 1.2rem;
+  color: #00b3ff;
+  margin-bottom: 5px;
+}
+
+.creator-card .role {
+  color: #ffd700;
+  font-weight: bold;
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+}
+
+.creator-card p {
+  font-size: 0.95rem;
+  color: #d0d0d0;
+  line-height: 1.4;
+}
+
+/* Animación más ligera */
+@keyframes softFade {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+
+/* ANIMACIÓN SUAVE (menos costosa que fade+blur) */
+@keyframes softFade {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.creator-card:hover {
+  transform: translateY(-10px) scale(1.03);
+  box-shadow: 0 0 25px rgba(0, 179, 255, 0.3);
+}
+
+.creator-card h3 {
+  font-size: 1.4rem;
+  color: #00b3ff;
+  margin-bottom: 10px;
+}
+
+.creator-card p {
+  font-size: 1rem;
+  color: #d0d0d0;
+  line-height: 1.4;
+}
+
+.creator-card .role {
+  color: #ffd700;
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+
+
+
+
+
+
+
+
+/* ===== CONTACTO ===== */
+.contact-section {
+  min-height: 100vh;
+  padding: 100px 10%;
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+}
+
+.contact-header {
+  text-align: center;
+  margin-bottom: 50px;
+  animation: fadeInDown 1s ease forwards;
+}
+
+.contact-header .title {
+  font-size: 2.8rem;
+  color: #00b3ff;
+  text-shadow: 0 0 25px rgba(0,179,255,0.4);
+}
+
+.contact-header .subtitle {
+  color: #d0d0d0;
+  font-size: 1.1rem;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.contact-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 50px;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+/* ===== FORMULARIO ===== */
+.contact-form {
+  flex: 1 1 400px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 30px;
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+  animation: fadeInLeft 1.2s ease forwards;
+  opacity: 0;
+}
+
+.contact-form label {
+  display: block;
+  color: #00b3ff;
+  margin-bottom: 5px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.contact-form input, 
+.contact-form textarea {
+  width: 100%;
+  background: rgba(255,255,255,0.1);
+  border: none;
+  border-radius: 8px;
+  padding: 12px;
+  color: #fff;
+  font-size: 1rem;
+  margin-bottom: 20px;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.contact-form input:focus, 
+.contact-form textarea:focus {
+  background: rgba(0, 179, 255, 0.15);
+  box-shadow: 0 0 10px rgba(0,179,255,0.4);
+}
+
+.btn-send {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(90deg, #007aff, #00b3ff);
+  border: none;
+  color: white;
+  font-size: 1rem;
+  border-radius: 10px;
+  padding: 12px 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  gap: 10px;
+}
+
+.btn-send:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px rgba(0,179,255,0.6);
+}
+
+.contact-info {
+  flex: 1 1 250px;
+  animation: fadeInRight 1.2s ease forwards;
+  opacity: 0;
+}
+
+.contact-info h3 {
+  color: #ffd700;
+  margin-bottom: 20px;
+}
+
+.contact-info ul {
+  list-style: none;
+  padding: 0;
+}
+
+.contact-info li {
+  margin-bottom: 15px;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.contact-info i {
+  color: #00b3ff;
+}
+
+/* ===== ANIMACIONES ===== */
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInLeft {
+  from { opacity: 0; transform: translateX(-30px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes fadeInRight {
+  from { opacity: 0; transform: translateX(30px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.contact-success {
+  text-align: center;
+  color: #00ff9d;
+  font-weight: bold;
+  background: rgba(0, 255, 157, 0.1);
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 25px;
+  border: 1px solid rgba(0,255,157,0.3);
+  backdrop-filter: blur(8px);
+}
