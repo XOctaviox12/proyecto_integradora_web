@@ -1,58 +1,61 @@
-<!doctype html>
+<!DOCTYPE html>
+
 <html lang="es">
-<head>
-  {% load static %}
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{% block title %}Estrella Errante{% endblock %}</title>
-
-  <!-- Progressive Web App -->
-  <link rel="manifest" href="{% static 'inicio/manifest.json' %}">
-  <meta name="theme-color" content="#0a0a15">
-  <meta name="description" content="Estrella Errante — un viaje intergaláctico lleno de aventuras y misterios.">
-
-  <!-- CSS principal -->
-  <link rel="stylesheet" href="{% static 'inicio/css/styles.css' %}?v=6">
-
-  <!-- Icono -->
-  <link rel="icon" href="{% static 'inicio/images/icon-192.png' %}">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-</head>
-
-<body>
-  <div id="bg-anim"></div>
-
-  <header class="main-header">
-    <div class="logo">🌌 <a href="{% url 'webapp:home' %}">Estrella Errante</a></div>
-    <nav>
-  <a href="{% url 'webapp:home' %}">Inicio</a>
-  <a href="{% url 'webapp:creators' %}">Creadores</a>
-  <a href="{% url 'webapp:contact' %}">Contacto</a>
-  <a href="{% url 'webapp:registro' %}">Registro</a> <!-- 👈 aquí -->
-</nav>
-  </header>
-
-  <main class="content-fade">
-    {% block content %}{% endblock %}
-  </main>
-  <link rel="icon" type="image/x-icon" href="{% static 'images/favicon.ico' %}">
-
-  <footer class="footer">
-    <p>© 2025 Estrella Errante — Todos los derechos reservados.</p>
-  </footer>
-
-  <script>
-    // === SERVICE WORKER ===
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register("{% static 'inicio/service-worker.js' %}")
-          .then(reg => console.log('Service Worker registrado:', reg.scope))
-          .catch(err => console.error('Error en Service Worker:', err));
-      });
-    }
-  </script>
-
-  <!-- JS principal -->
-  <script src="{% static 'inicio/js/main.js' %}?v=3"></script>
-</body>
+  <head>
+    {% load static %}
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}Estrella Errante{% endblock %}</title>
+    <!-- Progressive Web App -->
+    <link rel="manifest" href="{% static 'inicio/manifest.json' %}" />
+    <meta name="theme-color" content="#0a0a15" />
+    <meta
+      name="description"
+      content="Estrella Errante — un viaje intergaláctico lleno de aventuras y misterios."
+    />
+    <!-- CSS principal -->
+    <link rel="stylesheet" href="{% static 'inicio/css/styles.css' %}?v=6" />
+    <!-- Icono -->
+    <link rel="icon" href="{% static 'inicio/images/icon-192.png' %}" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div id="bg-anim"></div>
+    <header class="main-header">
+      <div class="logo">
+        🌌 <a href="{% url 'webapp:home' %}">LOYA PENDEJO</a>
+      </div>
+      <nav>
+        <a href="{% url 'webapp:home' %}">Inicio</a>
+        <a href="{% url 'webapp:creators' %}">Creadores</a>
+        <a href="{% url 'webapp:contact' %}">Contacto</a>
+        <a href="{% url 'webapp:registro' %}">Registro</a>
+      </nav>
+    </header>
+    <main class="content-fade">{% block content %}{% endblock %}</main>
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="{% static 'images/favicon.ico' %}"
+    />
+    <footer class="footer">
+      <p>© 2025 Estrella Errante — Todos los derechos reservados.</p>
+    </footer>
+    <script>
+      // === SERVICE WORKER ===
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+          navigator.serviceWorker
+            .register("{% static 'inicio/service-worker.js' %}")
+            .then((reg) => console.log("Service Worker registrado:", reg.scope))
+            .catch((err) => console.error("Error en Service Worker:", err));
+        });
+      }
+    </script>
+    <!-- JS principal -->
+    <script src="{% static 'inicio/js/main.js' %}?v=3"></script>
+  </body>
 </html>
