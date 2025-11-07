@@ -1,5 +1,5 @@
 from django import forms
-from .models import Explorador
+from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 
 class ContactForm(forms.Form):
@@ -9,14 +9,14 @@ class ContactForm(forms.Form):
 
 
 class RegistroForm(forms.ModelForm):
-    contraseña1 = forms.CharField(
+    password1 = forms.CharField(
         label="Contraseña",
         widget=forms.PasswordInput(attrs={
             "class": "form-control cosmic-input",
             "placeholder": "••••••••"
         })
     )
-    contraseña2 = forms.CharField(
+    password2 = forms.CharField(
         label="Confirmar Contraseña",
         widget=forms.PasswordInput(attrs={
             "class": "form-control cosmic-input",
@@ -25,14 +25,14 @@ class RegistroForm(forms.ModelForm):
     )
 
     class Meta:
-        model = Explorador
-        fields = ["nombre", "correo"]
+        model = User
+        fields = ["username", "email"]
         widgets = {
-            "nombre": forms.TextInput(attrs={
+            "username": forms.TextInput(attrs={
                 "class": "form-control cosmic-input",
-                "placeholder": "Nombre completo"
+                "placeholder": "Nombre de usuario"
             }),
-            "correo": forms.EmailInput(attrs={
+            "email": forms.EmailInput(attrs={
                 "class": "form-control cosmic-input",
                 "placeholder": "correo@galaxia.com"
             }),
@@ -40,15 +40,16 @@ class RegistroForm(forms.ModelForm):
 
     def clean(self):
         cleaned_data = super().clean()
-        p1 = cleaned_data.get("contraseña1")
-        p2 = cleaned_data.get("contraseña2")
-        if p1 and p2 and p1 != p2:
-            raise ValidationError("⚠️ Las contraseñas no coinciden.")
+        password1 = cleaned_data.get("password1")
+        password2 = cleaned_data.get("password2")
+
+        if password1 and password2 and password1 != password2:
+            self.add_error("password2", "⚠️ Las contraseñas no coinciden.")
         return cleaned_data
 
     def save(self, commit=True):
-        explorador = super().save(commit=False)
-        explorador.contraseña = self.cleaned_data["contraseña1"]
+        user = super().save(commit=False)
+        user.set_password(self.cleaned_data["password1"])
         if commit:
-            explorador.save()
-        return explorador
+            user.save()
+        return user

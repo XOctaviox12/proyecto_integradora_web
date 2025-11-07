@@ -12,7 +12,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # === SEGURIDAD ===
 SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-l34_qu3dw&%3b+@m^#l_i5(o0sgsd%e=owg!cc4)xph2f%8ohr')
-DEBUG = False  # ⚠️ Desactiva debug en producción
+DEBUG = True  # ⚠️ Desactiva debug en producción
 
 ALLOWED_HOSTS = ['facebomb.onrender.com', 'localhost', '127.0.0.1']
 
@@ -60,13 +60,20 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'game_site.wsgi.application'
 
-# === BASE DE DATOS (Render PostgreSQL) ===
+# # === BASE DE DATOS (Render PostgreSQL) ===
+# DATABASES = {
+#     'default': dj_database_url.config(
+#         default=os.getenv('DATABASE_URL', 'sqlite:///' + str(BASE_DIR / 'db.sqlite3')),
+#         conn_max_age=600,
+#         ssl_require=True
+#     )
+# }
+
 DATABASES = {
-    'default': dj_database_url.config(
-        default=os.getenv('DATABASE_URL', 'sqlite:///' + str(BASE_DIR / 'db.sqlite3')),
-        conn_max_age=600,
-        ssl_require=True
-    )
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
 }
 
 # === VALIDACIÓN DE CONTRASEÑAS ===
