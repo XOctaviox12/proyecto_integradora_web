@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
+from .models import Jugadores
 
 
 
@@ -21,7 +22,7 @@ class RegistroForm(forms.ModelForm):
     )
 
     class Meta:
-        model = User
+        model = Jugadores
         fields = ["username", "email"]
         widgets = {
             "username": forms.TextInput(attrs={
@@ -36,20 +37,18 @@ class RegistroForm(forms.ModelForm):
 
     def clean(self):
         cleaned_data = super().clean()
-        password1 = cleaned_data.get("password1")
-        password2 = cleaned_data.get("password2")
-
-        if password1 and password2 and password1 != password2:
+        p1 = cleaned_data.get("password1")
+        p2 = cleaned_data.get("password2")
+        if p1 and p2 and p1 != p2:
             raise ValidationError("⚠️ Las contraseñas no coinciden.")
         return cleaned_data
 
     def save(self, commit=True):
-        user = super().save(commit=False)
-        user.set_password(self.cleaned_data["password1"])
+        jugador = super().save(commit=False)
+        jugador.password = self.cleaned_data["password1"]
         if commit:
-            user.save()
-        return user
-    
+            jugador.save()
+        return jugador
 
 class ContactForm(forms.Form):
     name = forms.CharField(
