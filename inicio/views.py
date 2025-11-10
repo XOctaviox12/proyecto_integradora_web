@@ -15,9 +15,33 @@ CREATORS = [
     {"name": "Octavio", "role": "Programación", "bio": "Gameplay."},
 ]
 
+# def home(request):
+#     history = "Face-Bomb combina humor, acción y nostalgia escolar en una experiencia tan absurda como divertida. Cada partida es una carrera contra el tiempo, la disciplina y el caos del aula.repárate para reír, esquivar y sobrevivir mientras los libros vuelan por tu cabeza y tus compañeros esperan ansiosos sus caramelos prohibidos."
+#     return render(request, "inicio/home.html", {"history": history, "characters": CHARACTERS})
 def home(request):
-    history = "Face-Bomb combina humor, acción y nostalgia escolar en una experiencia tan absurda como divertida. Cada partida es una carrera contra el tiempo, la disciplina y el caos del aula.repárate para reír, esquivar y sobrevivir mientras los libros vuelan por tu cabeza y tus compañeros esperan ansiosos sus caramelos prohibidos."
-    return render(request, "inicio/home.html", {"history": history, "characters": CHARACTERS})
+    # Incrementar contador de visitas
+    visit, created = PageVisit.objects.get_or_create(id=1)
+    visit.count += 1
+    visit.save()
+
+    # Texto original
+    history = (
+        "Face-Bomb combina humor, acción y nostalgia escolar en una experiencia tan absurda como divertida. "
+        "Cada partida es una carrera contra el tiempo, la disciplina y el caos del aula. "
+        "Prepárate para reír, esquivar y sobrevivir mientras los libros vuelan por tu cabeza "
+        "y tus compañeros esperan ansiosos sus caramelos prohibidos."
+    )
+
+    # Renderizar con todo el contexto
+    return render(
+        request,
+        "inicio/home.html",
+        {
+            "history": history,
+            "characters": CHARACTERS,
+            "contador_visitas": visit.count,
+        },
+    )
 
 def creators(request):
     return render(request, "inicio/creators.html", {"creators": CREATORS})
