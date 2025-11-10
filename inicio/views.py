@@ -63,14 +63,25 @@ def registro(request):
     visit.count += 1
     visit.save()
 
-    # Contador de usuarios registrados (usa el modelo User)
+    # Formulario de registro
+    form = RegistroForm(request.POST or None)
+    registrado = False
+
+    if request.method == "POST" and form.is_valid():
+        user = form.save()
+        registrado = True
+        # messages.success(request, "¡Registro completado con éxito!")
+        form = RegistroForm()
+
+    # Contador de usuarios registrados
     contador_registros = User.objects.count()
 
     return render(request, 'inicio/registro.html', {
-        'contador_registros': contador_registros,
+        'form': form,
+        'registrado': registrado,
+        'contador': contador_registros,   # 👈 nombre corregido
         'contador_visitas': visit.count
     })
-
 
 
 
