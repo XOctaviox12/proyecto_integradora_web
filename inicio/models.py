@@ -1,7 +1,4 @@
 from django.db import models
-
-# Create your models here.
-from django.db import models
 from django.contrib.auth.models import User
 
 class Profile(models.Model):
@@ -15,3 +12,7 @@ class Profile(models.Model):
 class Estadisticas(models.Model):
     visitas_home = models.PositiveIntegerField(default=0)
     registros_exitosos = models.PositiveIntegerField(default=0)
+
+
+class PageVisit(models.Model):
+    count = models.IntegerField(default=0)

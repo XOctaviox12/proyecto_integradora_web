@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.models import User
 from .forms import  RegistroForm, ContactForm
-from .models import Estadisticas
+from .models import Estadisticas, PageVisit
 
 
 CHARACTERS = [
@@ -32,22 +32,21 @@ def contact(request):
     return render(request, "inicio/contact.html", {"form": form, "sent": sent})
 
 # 🪐 Vista de registro con contador
+
 def registro(request):
-    contador = User.objects.count()  # 🧮 Contador de usuarios registrados
+    # Contador de visitas
+    visit, created = PageVisit.objects.get_or_create(id=1)
+    visit.count += 1
+    visit.save()
 
-    if request.method == "POST":
-        form = RegistroForm(request.POST)
-        if form.is_valid():
-            form.save()
-            messages.success(request, "🚀 Registro completado. ¡Bienvenido a la tripulación!")
-            return redirect("webapp:registro")
-    else:
-        form = RegistroForm()
+    # Contador de usuarios registrados (usa el modelo User)
+    contador_registros = User.objects.count()
 
-    return render(request, "inicio/registro.html", {
-        "form": form,
-        "contador": contador
+    return render(request, 'inicio/registro.html', {
+        'contador_registros': contador_registros,
+        'contador_visitas': visit.count
     })
+
 
 
 
