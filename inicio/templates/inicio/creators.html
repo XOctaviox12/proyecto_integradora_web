@@ -2,16 +2,14 @@
 {% block title %}Equipo Creativo{% endblock %}
 {% load static %}
 {% block content %}
-<!-- Fondo animado de estrellas -->
-<div class="stars"></div>
-<div class="twinkling"></div>
 
 <section class="creators-section">
   <div class="intro">
     <h1 class="title">Equipo Creativo</h1>
     <p class="subtitle">
-      Conoce al equipo detrás de <strong>Estrella Errante</strong>, soñadores, artistas y desarrolladores
-      que convirtieron la imaginación en una galaxia interactiva. 🚀
+      Conoce a los genios detrás de <strong>Face-Bomb</strong> 💣, un grupo de desarrolladores que alguna vez
+      también fueron alumnos con mochilas llenas de ideas (y dulces de contrabando).  
+      Entre risas, código y un par de librazos, lograron convertir una travesura escolar en una aventura épica. 🍬📘
     </p>
   </div>
 
@@ -53,9 +51,219 @@
     <h2>Nuestra Visión</h2>
     <p>
       Crear experiencias interactivas que inspiren, emocionen y conecten a las personas a través del arte digital,
-      la narrativa y la tecnología. En <strong>Estrella Errante</strong> creemos que cada historia puede ser
+      la narrativa y la tecnología. En <strong>Face-Bomb</strong> creemos que cada historia puede ser
       un universo por descubrir.
     </p>
   </section>
 </section>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+  body {
+    background: repeating-linear-gradient(0deg,#3a2d26 0px,#3a2d26 8px,#352820 8px,#352820 16px);
+    color: #f5dba1;
+    font-family: "Press Start 2P", monospace;
+    margin: 0;
+    padding: 0;
+  }
+
+  .creators-section {
+    text-align: center;
+    padding: 2rem 1rem;
+    background: rgba(38,25,18,0.95);
+    border: 4px solid #7b3b1d;
+    border-radius: 10px;
+    margin: 1.5rem auto;
+    max-width: 1000px;
+    box-shadow: 0 0 30px rgba(255,160,60,0.4);
+  }
+
+  .title {
+    color: #ffe67b;
+    text-shadow: 3px 3px 0 #4a260c,0 0 12px #ffb000;
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    word-break: break-word;
+  }
+
+  .subtitle {
+    color: #f0d1a6;
+    font-size: 0.75rem;
+    max-width: 800px;
+    margin: 0 auto 2rem;
+    line-height: 1.6;
+    text-shadow: 1px 1px 0 #3a1b08;
+    word-break: break-word;
+  }
+
+  .creators-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+    gap: 1.5rem;
+  }
+
+  .creator-card {
+    background: #1b100e;
+    border: 3px solid #8c4520;
+    border-radius: 10px;
+    padding: 1rem;
+    text-align: center;
+    transition: 0.3s;
+    box-shadow: 0 0 20px rgba(255,140,0,0.2);
+  }
+
+  .creator-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px #ffb000;
+  }
+
+  .creator-avatar img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 3px solid #ffb000;
+    box-shadow: 0 0 15px #ffb000;
+    background: #2b1a11;
+  }
+
+  .creator-info {
+    margin-top: 1rem;
+  }
+
+  .creator-name {
+    color: #ffe67b;
+    font-size: 0.8rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .creator-role {
+    color: #ffb000;
+    font-size: 0.7rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .creator-bio {
+    color: #f0d1a6;
+    font-size: 0.65rem;
+    line-height: 1.5;
+    background: rgba(43,26,18,0.8);
+    border: 2px solid #7b3b1d;
+    border-radius: 6px;
+    padding: 0.5rem;
+    word-break: break-word;
+  }
+
+  .social-links {
+    margin-top: 0.7rem;
+  }
+
+  .social-icon {
+    display: inline-block;
+    margin: 0 0.3rem;
+    font-size: 1rem;
+    text-decoration: none;
+    color: #ffcc5c;
+    transition: 0.2s;
+  }
+
+  .social-icon:hover {
+    color: #ffb000;
+    text-shadow: 0 0 8px #ffb000;
+  }
+
+  .vision-section {
+    margin-top: 2rem;
+    background: #1c110e;
+    border: 3px solid #8c4520;
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 0 20px rgba(255,160,60,0.3);
+  }
+
+  .vision-section h2 {
+    color: #ffcc5c;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+  }
+
+  .vision-section p {
+    color: #ffe7c2;
+    font-size: 0.7rem;
+    line-height: 1.6;
+    text-align: justify;
+    word-break: break-word;
+  }
+
+  /* Animación */
+  .animate-up {
+    animation: fadeUp 0.7s ease-in-out both;
+  }
+
+  @keyframes fadeUp {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    .creators-section {
+      padding: 1.5rem;
+      margin: 1rem;
+    }
+
+    .title {
+      font-size: 1.1rem;
+    }
+
+    .subtitle {
+      font-size: 0.7rem;
+    }
+
+    .creator-avatar img {
+      width: 80px;
+      height: 80px;
+    }
+
+    .creator-name {
+      font-size: 0.7rem;
+    }
+
+    .creator-role {
+      font-size: 0.65rem;
+    }
+
+    .creator-bio {
+      font-size: 0.6rem;
+    }
+
+    .vision-section h2 {
+      font-size: 0.8rem;
+    }
+
+    .vision-section p {
+      font-size: 0.65rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .title {
+      font-size: 1rem;
+    }
+
+    .subtitle {
+      font-size: 0.65rem;
+    }
+
+    .creators-section {
+      padding: 1rem;
+    }
+
+    .creator-avatar img {
+      width: 70px;
+      height: 70px;
+    }
+  }
+</style>
+
 {% endblock %}

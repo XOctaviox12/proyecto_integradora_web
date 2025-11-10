@@ -1,0 +1,160 @@
+
+/* === VIDEOJUEGO.CSS === */
+/* Fuente arcade retro */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+body {
+  background: #1a1a1a;
+  font-family: 'Press Start 2P', cursive;
+  color: #00ffcc;
+  margin: 0;
+  padding: 0;
+}
+
+/* Secciones */
+section {
+  padding: 2rem;
+  background: url('https://www.transparenttextures.com/patterns/pixel-weave.png');
+  border-top: 4px solid #ff0066;
+  border-bottom: 4px solid #ff0066;
+}
+
+/* Títulos */
+.title {
+  font-size: 1.8rem;
+  color: #ff0066;
+  text-shadow: 2px 2px #000;
+  margin-bottom: 1rem;
+}
+
+.subtitle {
+  font-size: 0.9rem;
+  color: #ffffff;
+  margin-bottom: 1.5rem;
+}
+
+/* Contadores */
+.contador-jugadores,
+.contador-exploradores {
+  font-size: 1rem;
+  color: #ffff00;
+  background-color: #222;
+  padding: 0.5rem;
+  border: 2px dashed #ff0066;
+  margin-bottom: 2rem;
+}
+
+/* Contenedor de formularios */
+.register-container,
+.contact-container {
+  background: #111;
+  border: 2px solid #00ffcc;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 0 20px #00ffcc;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+/* Campos de formulario */
+.form-group {
+  margin-bottom: 1rem;
+  text-align: left;
+}
+
+label {
+  color: #ffcc00;
+  font-size: 0.8rem;
+  margin-bottom: 0.3rem;
+  display: block;
+}
+
+.cosmic-input {
+  width: 100%;
+  padding: 0.6rem;
+  background: #222;
+  border: 2px solid #00ffcc;
+  color: #fff;
+  font-family: 'Courier New', monospace;
+  border-radius: 5px;
+}
+
+.cosmic-input:focus {
+  border-color: #ff0066;
+  outline: none;
+  box-shadow: 0 0 10px #ff0066;
+}
+
+/* Botones */
+.btn-send {
+  background: #ff0066;
+  color: #fff;
+  border: none;
+  padding: 0.8rem;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  width: 100%;
+  font-family: 'Press Start 2P', cursive;
+}
+
+.btn-send:hover {
+  background: #ff3399;
+  box-shadow: 0 0 10px #ff3399;
+}
+
+/* Mensajes */
+.error-box {
+  background: #330000;
+  border: 2px solid #ff0000;
+  color: #ff6666;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.success-message,
+.contact-success {
+  background: #003300;
+  border: 2px solid #00ff00;
+  color: #66ff66;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+/* Tarjetas de personajes y creadores */
+.character-card,
+.creator-card {
+  background: #222;
+  border: 2px solid #00ffcc;
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 0 10px #00ffcc;
+  margin-bottom: 1rem;
+}
+
+.character-card h3,
+.creator-name {
+  color: #ffcc00;
+  font-size: 1rem;
+}
+
+.role,
+.creator-role {
+  color: #ff0066;
+  font-size: 0.8rem;
+}
+
+.desc,
+.creator-bio {
+  color: #ffffff;
+  font-size: 0.7rem;
+}
+
+/* Sección de video */
+.video-container iframe {
+  border: 4px solid #ff0066;
+  box-shadow: 0 0 15px #ff0066;
+  border-radius: 10px;
+}

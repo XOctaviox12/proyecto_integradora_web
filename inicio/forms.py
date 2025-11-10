@@ -2,24 +2,20 @@ from django import forms
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 
-class ContactForm(forms.Form):
-    name = forms.CharField(label="Nombre", max_length=100)
-    email = forms.EmailField(label="Correo")
-    message = forms.CharField(label="Mensaje", widget=forms.Textarea)
 
 
 class RegistroForm(forms.ModelForm):
     password1 = forms.CharField(
         label="Contraseña",
         widget=forms.PasswordInput(attrs={
-            "class": "form-control cosmic-input",
+            "class": "cosmic-input",
             "placeholder": "••••••••"
         })
     )
     password2 = forms.CharField(
-        label="Confirmar Contraseña",
+        label="Confirmar contraseña",
         widget=forms.PasswordInput(attrs={
-            "class": "form-control cosmic-input",
+            "class": "cosmic-input",
             "placeholder": "Repite tu contraseña"
         })
     )
@@ -29,11 +25,11 @@ class RegistroForm(forms.ModelForm):
         fields = ["username", "email"]
         widgets = {
             "username": forms.TextInput(attrs={
-                "class": "form-control cosmic-input",
+                "class": "cosmic-input",
                 "placeholder": "Nombre de usuario"
             }),
             "email": forms.EmailInput(attrs={
-                "class": "form-control cosmic-input",
+                "class": "cosmic-input",
                 "placeholder": "correo@galaxia.com"
             }),
         }
@@ -44,7 +40,7 @@ class RegistroForm(forms.ModelForm):
         password2 = cleaned_data.get("password2")
 
         if password1 and password2 and password1 != password2:
-            self.add_error("password2", "⚠️ Las contraseñas no coinciden.")
+            raise ValidationError("⚠️ Las contraseñas no coinciden.")
         return cleaned_data
 
     def save(self, commit=True):
@@ -53,3 +49,39 @@ class RegistroForm(forms.ModelForm):
         if commit:
             user.save()
         return user
+    
+
+class ContactForm(forms.Form):
+    name = forms.CharField(
+        label="Nombre",
+        required=True,
+        max_length=100,
+        widget=forms.TextInput(attrs={
+            "type": "text",
+            "class": "cosmic-input",
+            "placeholder": "Escribe tu nombre completo",
+            "id": "id_name",
+            "autocomplete": "off"
+        })
+    )
+
+    email = forms.EmailField(
+        label="Correo Electrónico",
+        required=True,
+        widget=forms.EmailInput(attrs={
+            "class": "cosmic-input",
+            "placeholder": "tu@correo.com",
+            "id": "id_email"
+        })
+    )
+
+    message = forms.CharField(
+        label="Mensaje",
+        required=True,
+        widget=forms.Textarea(attrs={
+            "class": "cosmic-input",
+            "rows": 4,
+            "placeholder": "Tu mensaje intergaláctico...",
+            "id": "id_message"
+        })
+    )   

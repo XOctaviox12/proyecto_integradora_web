@@ -1,17 +1,19 @@
 {% extends "inicio/base.html" %}
-{% block title %}Inicio {% endblock %}
+{% block title %}Inicio{% endblock %}
 
 {% block content %}
 <div class="hero">
   <div class="hero-text">
-    <h1 class="title">loya</h1>
-    <p class="subtitle">Embárcate en un viaje intergaláctico lleno de misterio, aventuras y decisiones que marcarán tu destino.</p>
+    <h1 class="title">Face-Bomb</h1>
+    <p class="subtitle">
+      En un salón cualquiera… o quizá no tan común, un alumno rebelde conocido como el Vendedor Clandestino desafía las reglas del sistema académico.
+    </p>
   </div>
 </div>
 
 <!-- Historia -->
 <section class="history-section">
-  <h2 class="section-title">Historia del Juego</h2>
+  <h2 class="section-title">Una historia de dulces, caos y venganza académica.</h2>
   <p class="history-text">{{ history }}</p>
 </section>
 
@@ -30,37 +32,313 @@
     {% endfor %}
   </div>
 </section>
+
+<!-- Gameplay -->
 <section class="gameplay-section">
   <h2 class="section-title">Mecánicas del Juego</h2>
   <div class="gameplay-cards">
     <div class="gameplay-card">
-      <h3>Exploración</h3>
-      <p>Descubre planetas y secretos ocultos en cada misión.</p>
+      <h3>Esquivar Librazos</h3>
+      <p>
+        Los profesores no tienen piedad: lanzarán libros con precisión quirúrgica.
+        Usa tus reflejos para esquivar cada ataque y mantener tus tres vidas intactas.
+      </p>
     </div>
     <div class="gameplay-card">
-      <h3>Batallas Espaciales</h3>
-      <p>Enfréntate a enemigos en combates estratégicos.</p>
+      <h3>Entrega Secreta</h3>
+      <p>
+        Muévete entre las butacas del salón y pasa los dulces sin que te vean.
+        Cada compañero satisfecho te acerca a la victoria… y al caos absoluto.
+      </p>
     </div>
     <div class="gameplay-card">
-      <h3>Decisiones</h3>
-      <p>Cada decisión afectará la historia y los finales posibles.</p>
+      <h3>Sobrevive al Aula</h3>
+      <p>
+        La tensión aumenta con cada mirada del profesor. Planea tu ruta, esquiva el castigo
+        y demuestra que eres el verdadero maestro del contrabando estudiantil.
+      </p>
     </div>
   </div>
 </section>
+
+<!-- Noticias -->
 <section class="updates-section">
   <h2 class="section-title">Últimas Noticias</h2>
   <ul class="updates-list">
-    <li>Nuevo planeta desbloqueado en la actualización 1.2</li>
-    <li>Evento especial de Halloween disponible hasta el 31 de octubre</li>
-    <li>Mejoras en las animaciones de combate y personajes</li>
+    <li>📚 ¡Nueva versión 1.2! Ahora los profesores lanzan libros más rápido… y con más coraje.</li>
+    <li>🍬 Se agregan nuevos tipos de dulces: caramelos explosivos y gomitas turbo.</li>
+    <li>🧠 Mejora la IA de los profesores: ahora te detectan si corres mucho tiempo en línea recta.</li>
+    <li>🎒 Nuevo modo “Hora del Receso”: prueba tu velocidad en una carrera por sobrevivir antes del timbre.</li>
   </ul>
 </section>
+
+<!-- Video -->
 <section class="video-section">
   <h2 class="section-title">Trailer del Juego</h2>
+  <p class="subtitle" style="text-align:center; color:#9be7ff;">
+    Mira cómo un simple alumno convierte el salón en un campo de batalla escolar 🍭💥  
+  </p>
   <div class="video-container">
-    <iframe width="100%" height="400" src="https://www.youtube.com/embed/VIDEO_ID" title="Trailer del juego" frameborder="0" allowfullscreen></iframe>
+    <iframe 
+      src="https://www.youtube.com/embed/VIDEO_ID"
+      title="Trailer oficial de Face-Bomb"
+      frameborder="0"
+      allowfullscreen>
+    </iframe>
   </div>
 </section>
 
-{% endblock %}
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
+  body {
+    background: repeating-linear-gradient(0deg,#3a2d26 0px,#3a2d26 8px,#352820 8px,#352820 16px);
+    color: #f5dba1;
+    font-family: "Press Start 2P", monospace;
+    line-height: 1.6;
+  }
+
+  .hero {
+    background: linear-gradient(180deg, #241a17 0%, #1b100e 100%);
+    border-bottom: 4px solid #7b3b1d;
+    text-align: center;
+    padding: 3rem 1rem;
+    box-shadow: inset 0 0 30px #000, 0 0 25px rgba(255, 140, 0, 0.3);
+  }
+
+  .hero .title {
+    font-size: 1.8rem;
+    color: #ffe67b;
+    text-shadow: 3px 3px 0 #4a260c, 0 0 12px #ffb000;
+    margin-bottom: 1rem;
+  }
+
+  .hero .subtitle {
+    color: #f0d1a6;
+    font-size: 0.85rem;
+    text-shadow: 1px 1px 0 #3a1b08;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  section {
+    padding: 2rem 1rem;
+    margin: 2rem auto;
+    max-width: 900px;
+    background: #261912;
+    border: 3px solid #8c4520;
+    border-radius: 8px;
+    box-shadow: 0 0 25px rgba(255, 160, 60, 0.3);
+  }
+
+  .section-title {
+    color: #ffcc5c;
+    font-size: 1rem;
+    text-shadow: 2px 2px 0 #4a260c, 0 0 10px #ffb000;
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .history-text {
+    color: #ffe7c2;
+    font-size: 0.8rem;
+    text-align: justify;
+    background: rgba(43, 26, 18, 0.8);
+    border-radius: 6px;
+    padding: 1rem;
+    border: 2px solid #7b3b1d;
+  }
+
+  /* Personajes */
+  .characters-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 1.2rem;
+  }
+
+  .character-card {
+    background: #1c110e;
+    border: 2px solid #7b3b1d;
+    border-radius: 6px;
+    padding: 1rem;
+    box-shadow: 0 0 10px rgba(255, 180, 50, 0.2);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .character-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px #ffb000;
+  }
+
+  .character-card h3 {
+    color: #ffe67b;
+    font-size: 0.8rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .role {
+    color: #ffb000;
+    font-size: 0.65rem;
+    text-shadow: 1px 1px 0 #4a260c;
+  }
+
+  .desc {
+    color: #f0d1a6;
+    font-size: 0.7rem;
+    line-height: 1.5;
+  }
+
+  /* Gameplay */
+  .gameplay-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1rem;
+  }
+
+  .gameplay-card {
+    background: #1b100e;
+    border: 2px solid #8c4520;
+    border-radius: 6px;
+    padding: 1rem;
+    color: #ffe7c2;
+    font-size: 0.75rem;
+    text-align: left;
+    transition: 0.3s;
+  }
+
+  .gameplay-card:hover {
+    background: #29170f;
+    box-shadow: 0 0 12px #ffb000;
+  }
+
+  .gameplay-card h3 {
+    color: #ffcc5c;
+    text-shadow: 1px 1px 0 #4a260c;
+    font-size: 0.8rem;
+    margin-bottom: 0.5rem;
+  }
+
+  /* Noticias */
+  .updates-list {
+    list-style: none;
+    padding: 0;
+    font-size: 0.75rem;
+    color: #ffe7c2;
+  }
+
+  .updates-list li {
+    background: rgba(43, 26, 18, 0.8);
+    border: 2px solid #7b3b1d;
+    border-radius: 6px;
+    padding: 0.7rem;
+    margin-bottom: 0.6rem;
+    transition: 0.3s;
+  }
+
+  .updates-list li:hover {
+    background: #301b13;
+    box-shadow: 0 0 8px #ffb000;
+  }
+
+  /* Video */
+  .video-section {
+    background: #1c110e;
+    border: 3px solid #8c4520;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(255, 160, 60, 0.3);
+    padding: 2rem;
+  }
+
+  .video-container {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%;
+    border: 4px solid #7b3b1d;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(255, 140, 0, 0.3);
+  }
+
+  .video-container iframe {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+  }
+
+  /* Animación */
+  .animate-fade {
+    animation: pixelFade 0.6s ease-in-out;
+  }
+
+  @keyframes pixelFade {
+    0% { opacity: 0; transform: scale(0.95); }
+    100% { opacity: 1; transform: scale(1); }
+  }
+
+  /* 📱 RESPONSIVE DESIGN */
+  @media (max-width: 768px) {
+    .hero {
+      padding: 2rem 1rem;
+    }
+
+    .hero .title {
+      font-size: 1.4rem;
+    }
+
+    .hero .subtitle {
+      font-size: 0.75rem;
+    }
+
+    section {
+      margin: 1rem auto;
+      padding: 1.5rem 1rem;
+    }
+
+    .section-title {
+      font-size: 0.9rem;
+    }
+
+    .history-text,
+    .gameplay-card,
+    .updates-list li {
+      font-size: 0.7rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    body {
+      font-size: 12px;
+    }
+
+    .hero .title {
+      font-size: 1.1rem;
+    }
+
+    .hero .subtitle {
+      font-size: 0.65rem;
+    }
+
+    .section-title {
+      font-size: 0.8rem;
+    }
+
+    .character-card h3 {
+      font-size: 0.7rem;
+    }
+
+    .desc, .role {
+      font-size: 0.6rem;
+    }
+
+    .gameplay-card {
+      font-size: 0.65rem;
+    }
+
+    .video-section {
+      padding: 1rem;
+    }
+  }
+</style>
+{% endblock %}

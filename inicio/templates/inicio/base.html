@@ -4,55 +4,177 @@
   {% load static %}
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{% block title %}Estrella Errante{% endblock %}</title>
+  <title>{% block title %}Face-Bomb{% endblock %}</title>
 
-  <!-- Progressive Web App -->
-  <link rel="manifest" href="{% static 'inicio/manifest.json' %}">
-  <meta name="theme-color" content="#0a0a15">
-  <meta name="description" content="Estrella Errante — un viaje intergaláctico lleno de aventuras y misterios.">
+  <!-- Fuente Pixel Arcade -->
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 
   <!-- CSS principal -->
-  <link rel="stylesheet" href="{% static 'inicio/css/styles.css' %}?v=6">
+  <link rel="stylesheet" href="{% static 'inicio/css/styles.css' %}?v=10">
 
-  <!-- Icono -->
   <link rel="icon" href="{% static 'inicio/images/icon-192.png' %}">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+  <style>
+    body {
+      font-family: 'Press Start 2P', cursive;
+      background-color: #0b0b0b;
+      color: #f7c948;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* ==== HEADER ==== */
+    header.main-header {
+      background: #1a1a1a;
+      border-bottom: 2px solid #f7c948;
+      padding: 1rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 1000;
+    }
+
+    .logo a {
+      text-decoration: none;
+      color: #f7c948;
+      font-size: 1rem;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 0.75rem;
+      transition: color 0.2s ease;
+    }
+
+    nav a:hover {
+      color: #f7c948;
+    }
+
+    /* ==== BOTÓN HAMBURGUESA ==== */
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: #f7c948;
+      font-size: 1.3rem;
+      cursor: pointer;
+    }
+
+    /* ==== MAIN ==== */
+    main {
+      flex: 1;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    /* ==== FOOTER ==== */
+    footer {
+      background: #111;
+      padding: 1rem;
+      border-top: 2px solid #f7c948;
+      font-size: 0.6rem;
+      text-align: center;
+    }
+
+    /* ==== RESPONSIVE ==== */
+    @media (max-width: 768px) {
+      header.main-header {
+        flex-wrap: nowrap;
+      }
+
+      .menu-toggle {
+        display: block;
+      }
+
+      nav {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        background: #111;
+        border-top: 2px solid #f7c948;
+        padding: 1rem 0;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        z-index: 999;
+      }
+
+      nav a {
+        display: block;
+        margin: 0.5rem 0;
+        font-size: 0.7rem;
+      }
+
+      nav.show {
+        display: flex;
+      }
+
+      main {
+        padding: 1rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .logo a {
+        font-size: 0.9rem;
+      }
+      nav a {
+        font-size: 0.65rem;
+      }
+      footer {
+        font-size: 0.55rem;
+      }
+    }
+  </style>
 </head>
 
 <body>
-  <div id="bg-anim"></div>
-
   <header class="main-header">
-    <div class="logo">🌌 <a href="{% url 'webapp:home' %}">Estrella Errante</a></div>
-    <nav>
-  <a href="{% url 'webapp:home' %}">Inicio</a>
-  <a href="{% url 'webapp:creators' %}">Creadores</a>
-  <a href="{% url 'webapp:contact' %}">Contacto</a>
-  <a href="{% url 'webapp:registro' %}">Registro</a> <!-- 👈 aquí -->
-</nav>
+    <div class="logo">💣 <a href="{% url 'webapp:home' %}">Face-Bomb</a></div>
+
+    <button class="menu-toggle" aria-label="Abrir menú">
+      <i class="fas fa-bars"></i>
+    </button>
+
+    <nav id="nav-menu">
+      <a href="{% url 'webapp:home' %}">Inicio</a>
+      <a href="{% url 'webapp:creators' %}">Creadores</a>
+      <a href="{% url 'webapp:contact' %}">Contacto</a>
+      <a href="{% url 'webapp:registro' %}">Registro</a>
+    </nav>
   </header>
 
-  <main class="content-fade">
+  <main>
     {% block content %}{% endblock %}
   </main>
-  <link rel="icon" type="image/x-icon" href="{% static 'images/favicon.ico' %}">
 
-  <footer class="footer">
-    <p>© 2025 Estrella Errante — Todos los derechos reservados.</p>
+  <footer>
+    <p>© 2025 Face-Bomb — Arcade Edition 🎮</p>
   </footer>
 
   <script>
-    // === SERVICE WORKER ===
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register("{% static 'inicio/service-worker.js' %}")
-          .then(reg => console.log('Service Worker registrado:', reg.scope))
-          .catch(err => console.error('Error en Service Worker:', err));
-      });
-    }
-  </script>
+    // ✅ Toggle menú responsive
+    const toggleBtn = document.querySelector('.menu-toggle');
+    const navMenu = document.getElementById('nav-menu');
 
-  <!-- JS principal -->
-  <script src="{% static 'inicio/js/main.js' %}?v=3"></script>
+    toggleBtn.addEventListener('click', () => {
+      navMenu.classList.toggle('show');
+      toggleBtn.querySelector('i').classList.toggle('fa-bars');
+      toggleBtn.querySelector('i').classList.toggle('fa-xmark');
+    });
+  </script>
 </body>
 </html>
