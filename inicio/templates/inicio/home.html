@@ -23,10 +23,14 @@
   <div class="characters-grid">
     {% for c in characters %}
       <div class="character-card animate-fade">
+
+        <img src="{{ c.image.url }}" alt="{{ c.name }}" class="character-img">
+
         <div class="card-header">
           <h3>{{ c.name }}</h3>
           <span class="role">{{ c.role }}</span>
         </div>
+
         <p class="desc">{{ c.desc }}</p>
       </div>
     {% endfor %}
@@ -73,21 +77,16 @@
 </section>
 
 <!-- Video -->
-<section class="video-section">
+<!-- <section class="video-section">
   <h2 class="section-title">Trailer del Juego</h2>
   <p class="subtitle" style="text-align:center; color:#9be7ff;">
     Mira cómo un simple alumno convierte el salón en un campo de batalla escolar 🍭💥  
   </p>
   <div class="video-container">
-    <iframe 
-      src="https://www.youtube.com/embed/VIDEO_ID"
-      title="Trailer oficial de Face-Bomb"
-      frameborder="0"
-      allowfullscreen>
-    </iframe>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/04eiI-98CEE?si=n6cOjowQvQIuRAdd" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
   </div>
 
-</section>
+</section> -->
 
 <div class="contador-visitas">
     👀 <strong>Visitas a la página:</strong> {{ contador_visitas }}
@@ -346,5 +345,26 @@
       padding: 1rem;
     }
   }
+
+
+.character-img {
+    width: 100%;
+    height: 220px; /* un poco más alto para que entren los personajes */
+    object-fit: contain; /* ← ahora sí se ven completos */
+    object-position: center;
+    background-color: #150c09; /* fondo para que no se vea vacío */
+    padding: 10px; /* margen interno para que no choquen con el borde */
+    border: 2px solid #7b3b1d;
+    border-radius: 6px;
+    margin-bottom: 0.7rem;
+    image-rendering: pixelated;
+    box-shadow: 0 0 12px rgba(255, 180, 50, 0.2);
+}
+
+@media (max-width: 480px) {
+    .character-img {
+        height: 170px; /* responsivo */
+    }
+}
 </style>
 {% endblock %}

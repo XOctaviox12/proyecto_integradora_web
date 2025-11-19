@@ -31,13 +31,19 @@
           {% if p.twitter or p.github or p.instagram %}
           <div class="social-links">
             {% if p.twitter %}
-              <a href="{{ p.twitter }}" target="_blank" class="social-icon twitter" title="Twitter">🐦</a>
+              <a href="{{ p.twitter }}" target="_blank" class="social-icon twitter" title="Twitter">
+                <img src="{% static 'images/twitter.png' %}" width="20">
+              </a>
             {% endif %}
             {% if p.github %}
-              <a href="{{ p.github }}" target="_blank" class="social-icon github" title="GitHub">💻</a>
+              <a href="{{ p.github }}" target="_blank" class="social-icon github" title="GitHub">
+                <img src="{% static 'images/github.png' %}" width="20">
+              </a>
             {% endif %}
             {% if p.instagram %}
-              <a href="{{ p.instagram }}" target="_blank" class="social-icon instagram" title="Instagram">📸</a>
+              <a href="{{ p.instagram }}" target="_blank" class="social-icon instagram" title="Instagram">
+                <img src="{% static 'images/instagram.png' %}" width="20">
+              </a>
             {% endif %}
           </div>
           {% endif %}
@@ -46,7 +52,6 @@
     {% endfor %}
   </div>
 
-  <!-- NUEVA SECCIÓN -->
   <section class="vision-section animate-up">
     <h2>Nuestra Visión</h2>
     <p>

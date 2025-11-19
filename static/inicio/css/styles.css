@@ -634,3 +634,27 @@ main { flex: 1; }
   border: 1px solid rgba(0,255,157,0.3);
   backdrop-filter: blur(8px);
 }
+
+/* OPTIMIZACIONES PARA LIGHTHOUSE */
+.character-card,
+.gameplay-card,
+.creator-card,
+.hero .title,
+.hero .subtitle,
+.history-section,
+.contact-form,
+.contact-info {
+  will-change: transform, opacity;
+}
+
+/* Elimina repeticiones innecesarias */
+#bg-anim {
+  position: fixed;
+  top: 0; 
+  left: 0;
+  width: 100%; 
+  height: 100%;
+  overflow: hidden;
+  z-index: -1;
+  background: radial-gradient(circle at top, #0a0a15, #000);
+}
