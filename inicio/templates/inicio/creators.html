@@ -23,6 +23,7 @@
             <img src="{% static 'images/default-avatar.png' %}" alt="Avatar genérico">
           {% endif %}
         </div>
+
         <div class="creator-info">
           <h3 class="creator-name">{{ p.name }}</h3>
           <p class="creator-role">{{ p.role }}</p>
@@ -123,13 +124,16 @@
     box-shadow: 0 0 20px #ffb000;
   }
 
+  /* ✅ NUEVO: IMÁGENES COMPLETAS, MISMO TAMAÑO, SIN RECORTES */
   .creator-avatar img {
-    width: 100px;
-    height: 100px;
+    width: 120px;
+    height: 120px;
+    object-fit: contain;   /* muestra TODA la imagen */
+    background: #2b1a11;   /* fondo uniforme */
     border-radius: 50%;
     border: 3px solid #ffb000;
     box-shadow: 0 0 15px #ffb000;
-    background: #2b1a11;
+    padding: 5px;          /* evita que toque los bordes */
   }
 
   .creator-info {
@@ -212,61 +216,16 @@
 
   /* RESPONSIVE */
   @media (max-width: 768px) {
-    .creators-section {
-      padding: 1.5rem;
-      margin: 1rem;
-    }
-
-    .title {
-      font-size: 1.1rem;
-    }
-
-    .subtitle {
-      font-size: 0.7rem;
-    }
-
     .creator-avatar img {
-      width: 80px;
-      height: 80px;
-    }
-
-    .creator-name {
-      font-size: 0.7rem;
-    }
-
-    .creator-role {
-      font-size: 0.65rem;
-    }
-
-    .creator-bio {
-      font-size: 0.6rem;
-    }
-
-    .vision-section h2 {
-      font-size: 0.8rem;
-    }
-
-    .vision-section p {
-      font-size: 0.65rem;
+      width: 100px;
+      height: 100px;
     }
   }
 
   @media (max-width: 480px) {
-    .title {
-      font-size: 1rem;
-    }
-
-    .subtitle {
-      font-size: 0.65rem;
-    }
-
-    .creators-section {
-      padding: 1rem;
-    }
-
     .creator-avatar img {
-      width: 70px;
-      height: 70px;
+      width: 90px;
+      height: 90px;
     }
   }
 </style>
