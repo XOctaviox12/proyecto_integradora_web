@@ -1,15 +1,18 @@
 import firebase_admin
 from firebase_admin import credentials, firestore
 import os
+from django.conf import settings
 
-# Ruta al archivo de credenciales
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-cred_path = os.path.join(BASE_DIR, "serviceAccountKey.json")
+# -------------------------------------------
+#   USAR LAS CREDENCIALES DESDE SETTINGS.PY
+#   (que vienen de Render)
+# -------------------------------------------
 
-# Inicializar Firebase solo una vez
+service_account_info = settings.FIREBASE_SERVICE_ACCOUNT
+
 if not firebase_admin._apps:
-    cred = credentials.Certificate(cred_path)
+    cred = credentials.Certificate(service_account_info)
     firebase_admin.initialize_app(cred)
 
-# Cliente de Firestore
+# Cliente Firestore
 db = firestore.client()
