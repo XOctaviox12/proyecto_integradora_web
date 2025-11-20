@@ -1,9 +1,7 @@
 from django import forms
-from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from .models import Jugadores
-
-
+from game_site.firebase import db   
 
 class RegistroForm(forms.ModelForm):
     password1 = forms.CharField(
@@ -46,9 +44,19 @@ class RegistroForm(forms.ModelForm):
     def save(self, commit=True):
         jugador = super().save(commit=False)
         jugador.password = self.cleaned_data["password1"]
+
         if commit:
             jugador.save()
+
+            # GUARDAR TAMBIÉN EN FIRESTORE
+            db.collection("jugadores").document(jugador.username).set({
+                "username": jugador.username,
+                "email": jugador.email,
+                "password": jugador.password,  # si quieres, quítalo
+            })
+
         return jugador
+
 
 class ContactForm(forms.Form):
     name = forms.CharField(
@@ -83,4 +91,4 @@ class ContactForm(forms.Form):
             "placeholder": "Tu mensaje intergaláctico...",
             "id": "id_message"
         })
-    )   
+    )
