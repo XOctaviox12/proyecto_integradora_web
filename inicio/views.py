@@ -50,7 +50,7 @@ CREATORS = [
         "name": "Alan",
         "role": "Diseñador de Sonido",
         "bio": "Música, ambientación y efectos de sonido para el videojuego.",
-        "image": "images/alan.jpg"
+        "image": "images/loya.jpg"
     },
 ]
 
