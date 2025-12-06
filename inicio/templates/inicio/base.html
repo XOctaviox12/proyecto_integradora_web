@@ -7,111 +7,176 @@
 
     <title>{% block title %}Face-Bomb{% endblock %}</title>
 
-    <!-- MANIFEST -->
     <link rel="manifest" href="{% static 'manifest.json' %}">
-    <meta name="theme-color" content="#f7c948">
+    <meta name="theme-color" content="#140d0b">
 
-    <!-- Fuente Pixel Arcade -->
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-
-    <!-- CSS principal -->
-    <link rel="stylesheet" href="{% static 'inicio/css/styles.css' %}?v=10">
-
-    <!-- Ícono -->
     <link rel="icon" href="{% static 'inicio/images/icon-192.png' %}">
 
     <style>
+      /* --- VARIABLES GLOBALES (Armonía Face-Bomb) --- */
+      :root {
+        --bg-dark: #140d0b;
+        --bg-header: #0f0806;
+        --primary: #ffcc00;       /* Dorado */
+        --primary-glow: rgba(255, 204, 0, 0.6);
+        --secondary: #7B3B1D;     /* Cobre */
+        --text-main: #dcb;
+        --text-highlight: #ffebb5;
+        --font-header: "Press Start 2P", cursive;
+        --font-body: "Courier Prime", monospace;
+      }
+
       body {
-        font-family: "Press Start 2P", cursive;
-        background-color: #0b0b0b;
-        color: #f7c948;
+        font-family: var(--font-body);
+        background-color: var(--bg-dark);
+        color: var(--text-main);
         margin: 0;
         padding: 0;
         display: flex;
         flex-direction: column;
         min-height: 100vh;
+        overflow-x: hidden;
       }
 
+      /* --- HEADER --- */
       header.main-header {
-        background: #1a1a1a;
-        border-bottom: 2px solid #f7c948;
+        background: var(--bg-header);
+        border-bottom: 3px solid var(--secondary);
         padding: 1rem 1.5rem;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        flex-wrap: wrap;
-        position: relative;
+        position: sticky;
+        top: 0;
         z-index: 1000;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.6);
       }
 
+      /* LOGO */
       .logo a {
         text-decoration: none;
-        color: #f7c948;
+        color: var(--primary);
+        font-family: var(--font-header);
         font-size: 1rem;
-      }
-
-      nav {
+        text-shadow: 2px 2px 0 #3a1a0d;
         display: flex;
         align-items: center;
-        gap: 0.8rem;
+        gap: 10px;
+        transition: transform 0.2s;
+      }
+      .logo a:hover { transform: scale(1.05); }
+      .logo i { font-size: 1.2rem; filter: drop-shadow(0 0 5px var(--primary)); }
+
+      /* NAV */
+      nav {
+        display: flex;
+        gap: 1.5rem;
       }
 
       nav a {
         color: #fff;
         text-decoration: none;
-        font-size: 0.75rem;
+        font-family: var(--font-header);
+        font-size: 0.6rem;
+        padding: 5px 10px;
+        border-radius: 4px;
+        transition: all 0.2s ease;
+        position: relative;
       }
 
-      nav a:hover {
-        color: #f7c948;
+      nav a:hover, nav a.active {
+        color: var(--primary);
+        text-shadow: 0 0 8px var(--primary-glow);
+        background: rgba(255, 204, 0, 0.1);
       }
 
+      /* TOGGLE MENU (Móvil) */
       .menu-toggle {
         display: none;
         background: none;
-        border: none;
-        color: #f7c948;
-        font-size: 1.3rem;
+        border: 2px solid var(--secondary);
+        color: var(--primary);
+        font-size: 1.2rem;
+        padding: 5px 10px;
+        border-radius: 4px;
         cursor: pointer;
+        transition: background 0.2s;
       }
+      .menu-toggle:hover { background: rgba(123, 59, 29, 0.2); }
 
+      /* MAIN */
       main {
         flex: 1;
-        padding: 2rem;
-        text-align: center;
+        /* El padding se maneja en cada sección individualmente */
       }
 
+      /* --- FOOTER --- */
       footer {
-        background: #111;
-        padding: 1rem;
-        border-top: 2px solid #f7c948;
-        font-size: 0.6rem;
+        background: #0a0504;
+        padding: 2rem 1rem;
+        border-top: 3px solid var(--secondary);
         text-align: center;
+        margin-top: auto;
+        position: relative;
+      }
+
+      .footer-content {
+        max-width: 1000px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .footer-logo {
+        font-family: var(--font-header);
+        color: var(--secondary);
+        font-size: 0.8rem;
+        opacity: 0.7;
+      }
+
+      .copyright {
+        font-size: 0.7rem;
+        color: #865;
+        font-family: var(--font-body);
       }
 
       /* RESPONSIVE */
       @media (max-width: 768px) {
-        .menu-toggle {
-          display: block;
-        }
+        .menu-toggle { display: block; }
+
         nav {
           display: none;
           flex-direction: column;
-          width: 100%;
-          background: #111;
-          border-top: 2px solid #f7c948;
-          padding: 1rem 0;
           position: absolute;
           top: 100%;
           left: 0;
-          z-index: 999;
+          width: 100%;
+          background: rgba(15, 8, 6, 0.98);
+          border-bottom: 3px solid var(--secondary);
+          padding: 1rem 0;
+          box-shadow: 0 10px 20px rgba(0,0,0,0.8);
+          animation: slideDown 0.3s ease-out;
         }
-        nav.show {
-          display: flex;
+
+        nav.show { display: flex; }
+
+        nav a {
+          text-align: center;
+          font-size: 0.8rem;
+          padding: 15px;
+          border-bottom: 1px dashed rgba(123, 59, 29, 0.3);
         }
+        nav a:last-child { border-bottom: none; }
+      }
+
+      @keyframes slideDown {
+        from { opacity: 0; transform: translateY(-10px); }
+        to { opacity: 1; transform: translateY(0); }
       }
     </style>
 </head>
@@ -119,39 +184,63 @@
 <body>
 
 <header class="main-header">
-  <div class="logo">💣 <a href="{% url 'webapp:home' %}">Face-Bomb</a></div>
+  <div class="logo">
+    <a href="{% url 'webapp:home' %}">
+      <i class="fas fa-bomb"></i> FACE-BOMB
+    </a>
+  </div>
 
   <button class="menu-toggle" aria-label="Abrir menú">
     <i class="fas fa-bars"></i>
   </button>
 
   <nav id="nav-menu">
-    <a href="{% url 'webapp:home' %}">Inicio</a>
-    <a href="{% url 'webapp:creators' %}">Creadores</a>
-    <a href="{% url 'webapp:contact' %}">Contacto</a>
-    <a href="{% url 'webapp:registro' %}">Registro</a>
+    <a href="{% url 'webapp:home' %}">INICIO</a>
+    <a href="{% url 'webapp:creators' %}">CREADORES</a>
+    <a href="{% url 'webapp:contact' %}">CONTACTO</a>
+    <a href="{% url 'webapp:registro' %}">REGISTRO</a>
   </nav>
 </header>
 
-<main>{% block content %}{% endblock %}</main>
+<main>
+  {% block content %}{% endblock %}
+</main>
 
 <footer>
-  <p>© 2025 Face-Bomb — Arcade Edition 🎮</p>
+  <div class="footer-content">
+    <div class="footer-logo">FACE-BOMB SYSTEM</div>
+    <p class="copyright">© 2025 - TODOS LOS DERECHOS RESERVADOS 🎮</p>
+  </div>
 </footer>
 
-<!-- Toggle menú -->
 <script>
   const toggleBtn = document.querySelector(".menu-toggle");
   const navMenu = document.getElementById("nav-menu");
+  const icon = toggleBtn.querySelector("i");
 
   toggleBtn.addEventListener("click", () => {
     navMenu.classList.toggle("show");
-    toggleBtn.querySelector("i").classList.toggle("fa-bars");
-    toggleBtn.querySelector("i").classList.toggle("fa-xmark");
+    
+    // Cambiar icono
+    if (navMenu.classList.contains("show")) {
+      icon.classList.remove("fa-bars");
+      icon.classList.add("fa-xmark");
+    } else {
+      icon.classList.remove("fa-xmark");
+      icon.classList.add("fa-bars");
+    }
+  });
+
+  // Cerrar menú al hacer click fuera
+  document.addEventListener('click', (e) => {
+    if (!toggleBtn.contains(e.target) && !navMenu.contains(e.target)) {
+      navMenu.classList.remove('show');
+      icon.classList.remove("fa-xmark");
+      icon.classList.add("fa-bars");
+    }
   });
 </script>
 
-<!-- SERVICE WORKER -->
 <script>
   if ("serviceWorker" in navigator) {
      navigator.serviceWorker.register('/static/service-worker.js')

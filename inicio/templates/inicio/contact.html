@@ -2,274 +2,406 @@
 {% block title %}Contacto{% endblock %}
 {% load static %}
 {% block content %}
+
+<div class="crt-overlay"></div>
+
 <section class="contact-section">
-  <div class="contact-header">
-    <h1 class="title">Contacto </h1>
+  
+  <div class="contact-header animate-fade-down">
+    <h1 class="title">CENTRO DE COMUNICACIONES</h1>
     <p class="subtitle">
-      ¿Tienes dudas, sugerencias o deseas unirte al equipo de desarrollo?
-      ¡Envíanos un mensaje desde cualquier rincón del universo!
+      ¿Dudas, sugerencias o quieres unirte a la rebelión?
+      <span class="highlight">Envíanos una transmisión cifrada.</span> 📡
     </p>
   </div>
 
   {% if sent %}
-    <div class="contact-success animate-fade">
-      <h2>🚀 ¡Mensaje enviado!</h2>
-      <p>Gracias por contactarnos, responderemos lo antes posible.</p>
+    <div class="retro-alert success animate-pop">
+      <div class="alert-icon">✔</div>
+      <div class="alert-content">
+        <h2>TRANSMISIÓN EXITOSA</h2>
+        <p>Mensaje recibido en la base. Cambio y fuera.</p>
+      </div>
     </div>
   {% endif %}
 
-  <div class="contact-container">
-    <div class="contact-form">
+  <div class="contact-grid">
+    
+    <div class="retro-panel form-panel animate-fade-up">
+      <div class="panel-header-bar">NUEVO MENSAJE</div>
+      
       <form method="post" novalidate>
         {% csrf_token %}
+        
         <div class="form-group">
-          <label for="id_name">Nombre</label>
-          {{ form.name }}
+          <label for="id_name">IDENTIFICADOR (NOMBRE)</label>
+          <div class="input-wrapper">
+            {{ form.name }}
+            <div class="input-glow"></div>
+          </div>
         </div>
+
         <div class="form-group">
-          <label for="id_email">Correo Electrónico</label>
-          {{ form.email }}
+          <label for="id_email">FRECUENCIA (EMAIL)</label>
+          <div class="input-wrapper">
+            {{ form.email }}
+            <div class="input-glow"></div>
+          </div>
         </div>
+
         <div class="form-group">
-          <label for="id_message">Mensaje</label>
-          {{ form.message }}
+          <label for="id_message">MENSAJE CIFRADO</label>
+          <div class="input-wrapper">
+            {{ form.message }}
+            <div class="input-glow"></div>
+          </div>
         </div>
+
         <button type="submit" class="btn-send">
-          <span>Enviar Mensaje</span>
-          <i class="fas fa-paper-plane"></i>
+          <span>ENVIAR TRANSMISIÓN</span>
+          <i class="fas fa-satellite-dish"></i>
         </button>
       </form>
+      
+      <div class="screw top-left"></div>
+      <div class="screw top-right"></div>
+      <div class="screw bottom-left"></div>
+      <div class="screw bottom-right"></div>
     </div>
 
-    <div class="contact-info">
-      <h3>O comunícate directamente:</h3>
-      <ul>
-        <li><i class="fas fa-envelope"></i> contacto@facebomb.com</li>
-        <li><i class="fas fa-phone"></i> +52 555 555 5555</li>
-        <li><i class="fas fa-map-marker-alt"></i> Sector 9, UTM</li>
+    <div class="retro-panel info-panel animate-fade-up" style="animation-delay: 0.2s;">
+      <div class="panel-header-bar">CANALES DIRECTOS</div>
+      
+      <ul class="contact-list">
+        <li>
+          <div class="icon-box"><i class="fas fa-envelope"></i></div>
+          <div class="info-text">
+            <span class="label">EMAIL</span>
+            <span class="value">contacto@facebomb.com</span>
+          </div>
+        </li>
+        <li>
+          <div class="icon-box"><i class="fas fa-phone-alt"></i></div>
+          <div class="info-text">
+            <span class="label">LÍNEA SEGURA</span>
+            <span class="value">+52 555 555 5555</span>
+          </div>
+        </li>
+        <li>
+          <div class="icon-box"><i class="fas fa-map-marker-alt"></i></div>
+          <div class="info-text">
+            <span class="label">BASE DE OPERACIONES</span>
+            <span class="value">Sector 9, UTM</span>
+          </div>
+        </li>
       </ul>
+
+      <div class="map-placeholder">
+        <div class="scan-line"></div>
+        <span>[SEÑAL DE GPS NO DISPONIBLE]</span>
+      </div>
     </div>
+
   </div>
 </section>
 
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Courier+Prime:wght@400;700&display=swap');
+
+  /* --- VARIABLES GLOBALES (Armonía Face-Bomb) --- */
+  :root {
+    --bg-dark: #140d0b;
+    --bg-card: #1e120e;
+    --primary: #ffcc00;       /* Dorado */
+    --primary-glow: rgba(255, 204, 0, 0.5);
+    --secondary: #7B3B1D;     /* Cobre */
+    --text-main: #dcb;
+    --header-font: "Press Start 2P", cursive;
+    --body-font: "Courier Prime", monospace;
+    --btn-grad-start: #ffb300;
+    --btn-grad-end: #ff5500;
+    --success: #00ff88;
+  }
 
   body {
-    background: repeating-linear-gradient(0deg,#3a2d26 0px,#3a2d26 8px,#352820 8px,#352820 16px);
-    font-family: "Press Start 2P", monospace;
-    color: #f5dba1;
-    margin: 0;
-    padding: 0;
+    background-color: var(--bg-dark);
+    background-image: 
+      linear-gradient(rgba(123, 59, 29, 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(123, 59, 29, 0.05) 1px, transparent 1px);
+    background-size: 40px 40px;
+    font-family: var(--body-font);
+    color: var(--text-main);
+    margin: 0; padding: 0;
+    min-height: 100vh;
   }
 
-  /* CRT Effect */
-  body::before {
-    content: "";
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    pointer-events: none;
-    background: repeating-linear-gradient(0deg,rgba(0,0,0,0.1) 0px,rgba(0,0,0,0.1) 1px,transparent 2px);
-    animation: flicker 0.12s infinite;
-    z-index: 9999;
+  /* Scanlines CRT */
+  .crt-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%);
+    background-size: 100% 4px;
+    pointer-events: none; z-index: 0; opacity: 0.15;
+    animation: scrollScanlines 10s linear infinite;
   }
 
-  @keyframes flicker {
-    0%,19%,21%,23%,25%,54%,56%,100% { opacity: 0.1; }
-    20%,24%,55% { opacity: 0.25; }
-  }
-
-  /* Contact Section */
   .contact-section {
-    max-width: 950px;
-    margin: 2rem auto;
-    background: linear-gradient(180deg,#241a17 0%,#1b100e 100%);
-    border: 4px solid #7b3b1d;
-    border-radius: 12px;
-    padding: 2rem;
+    position: relative;
+    z-index: 1;
+    padding: 3rem 1rem;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  /* --- HEADER --- */
+  .contact-header {
     text-align: center;
-    box-shadow: inset 0 0 20px #000,0 0 20px rgba(255,140,0,0.3);
+    margin-bottom: 3rem;
   }
 
   .title {
-    color: #ffe67b;
-    text-shadow: 2px 2px 0 #4a260c,0 0 12px #ffb000;
-    font-size: 1.4rem;
+    font-family: var(--header-font);
+    font-size: 1.5rem;
+    color: var(--primary);
+    text-shadow: 3px 3px 0 #3a1a0d, 0 0 15px var(--primary-glow);
     margin-bottom: 1rem;
-    word-break: break-word;
+    text-transform: uppercase;
+    animation: textPulse 3s infinite alternate;
   }
 
   .subtitle {
-    color: #f0d1a6;
-    font-size: 0.8rem;
+    font-size: 0.9rem;
+    color: #cbb;
     max-width: 700px;
-    margin: 0 auto 2rem;
+    margin: 0 auto;
     line-height: 1.6;
-    text-shadow: 1px 1px 0 #3a1b08;
-    word-break: break-word;
   }
 
-  .contact-container {
+  .highlight { color: var(--primary); font-weight: bold; }
+
+  /* --- GRID --- */
+  .contact-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 2rem;
   }
 
-  .contact-form, .contact-info {
-    background: #261912;
-    border: 3px solid #8c4520;
+  /* --- PANELES RETRO --- */
+  .retro-panel {
+    background: var(--bg-card);
+    border: 3px solid var(--secondary);
     border-radius: 8px;
-    padding: 1.5rem;
-    box-shadow: 0 0 20px rgba(255,160,60,0.3);
+    box-shadow: 
+      0 10px 25px rgba(0,0,0,0.6),
+      inset 0 0 40px rgba(0,0,0,0.3);
+    position: relative;
+    display: flex;
+    flex-direction: column;
   }
 
-  .form-group {
-    text-align: left;
-    margin-bottom: 1rem;
+  .panel-header-bar {
+    background: rgba(0,0,0,0.3);
+    border-bottom: 2px dashed var(--secondary);
+    padding: 10px;
+    text-align: center;
+    font-family: var(--header-font);
+    font-size: 0.7rem;
+    color: var(--secondary);
+    letter-spacing: 1px;
   }
+
+  /* Tornillos */
+  .screw {
+    position: absolute; width: 8px; height: 8px;
+    background: #4a2311; border-radius: 50%; box-shadow: inset 1px 1px 1px rgba(255,255,255,0.2);
+  }
+  .top-left { top: 10px; left: 10px; }
+  .top-right { top: 10px; right: 10px; }
+  .bottom-left { bottom: 10px; left: 10px; }
+  .bottom-right { bottom: 10px; right: 10px; }
+
+  /* --- FORMULARIO --- */
+  .form-panel { padding: 2rem; }
+
+  .form-group { margin-bottom: 1.5rem; text-align: left; }
 
   label {
     display: block;
-    font-weight: bold;
-    color: #ffcc5c;
-    margin-bottom: 0.3rem;
-    font-size: 0.7rem;
+    color: var(--primary);
+    font-size: 0.6rem;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    text-shadow: 1px 1px 0 #000;
+    font-family: var(--header-font);
   }
 
   input, textarea {
     width: 100%;
-    padding: 0.6rem;
-    border-radius: 6px;
-    border: 2px solid #7b3b1d;
-    background: #1c110e;
-    color: #ffe7c2;
-    font-family: "Press Start 2P", monospace;
-    font-size: 0.7rem;
+    padding: 12px;
+    border: 2px solid var(--secondary);
+    border-radius: 4px;
+    background: #0a0503;
+    color: #fff;
+    font-family: var(--body-font);
+    font-weight: bold;
+    font-size: 0.9rem;
     box-sizing: border-box;
+    transition: all 0.3s ease;
+    box-shadow: inset 2px 2px 5px rgba(0,0,0,0.5);
   }
 
   input:focus, textarea:focus {
-    border-color: #ffb000;
-    box-shadow: 0 0 8px #ffb000;
     outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 10px var(--primary-glow);
+    background: #140a05;
   }
 
+  textarea { min-height: 120px; resize: vertical; }
+
+  /* BOTÓN */
   .btn-send {
-    background: linear-gradient(90deg,#ffb000 0%,#ff4800 100%);
-    color: #2b1007;
-    border: 2px solid #803000;
-    padding: 0.8rem;
-    border-radius: 8px;
+    background: linear-gradient(180deg, var(--btn-grad-start) 0%, var(--btn-grad-end) 100%);
+    color: #2e0e05;
+    border: none;
+    padding: 1rem;
+    border-radius: 6px;
     width: 100%;
     font-size: 0.8rem;
-    font-family: "Press Start 2P", monospace;
+    font-family: var(--header-font);
     cursor: pointer;
-    text-shadow: 1px 1px 0 #ffe3b3;
-    transition: 0.2s;
+    font-weight: bold;
+    box-shadow: 0 6px 0 #993300, 0 10px 20px rgba(0,0,0,0.4);
+    transition: transform 0.1s;
+    text-transform: uppercase;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
   }
 
-  .btn-send:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 0 20px #ffb000;
+  .btn-send:active {
+    transform: translateY(4px);
+    box-shadow: 0 2px 0 #993300;
   }
 
-  .contact-info h3 {
-    color: #ffcc5c;
-    font-size: 0.8rem;
-    margin-bottom: 1rem;
-    text-shadow: 1px 1px 0 #3a1b08;
-  }
+  /* --- INFO PANEL --- */
+  .info-panel { padding: 0; }
 
-  .contact-info ul {
+  .contact-list {
     list-style: none;
-    padding: 0;
-    font-size: 0.7rem;
-    color: #ffe7c2;
+    padding: 2rem;
+    margin: 0;
   }
 
-  .contact-info li {
-    margin: 0.6rem 0;
-    word-break: break-word;
-  }
-
-  .contact-info i {
-    color: #ffb000;
-    margin-right: 0.5rem;
-  }
-
-  .contact-success {
-    background: rgba(40,90,40,0.8);
-    border: 2px solid #00ff88;
-    color: #aaffcc;
-    border-radius: 6px;
-    padding: 1rem;
+  .contact-list li {
+    display: flex;
+    align-items: center;
     margin-bottom: 1.5rem;
-    text-shadow: 1px 1px 0 #052;
+  }
+
+  .icon-box {
+    width: 40px; height: 40px;
+    background: #0f0806;
+    border: 1px solid var(--secondary);
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 4px;
+    margin-right: 15px;
+    color: var(--primary);
+    font-size: 1.2rem;
+    box-shadow: 0 0 10px rgba(123, 59, 29, 0.2);
+  }
+
+  .info-text {
+    display: flex; flex-direction: column;
+  }
+
+  .info-text .label {
+    font-size: 0.6rem;
+    color: #865;
+    font-weight: bold;
+    margin-bottom: 2px;
+  }
+
+  .info-text .value {
+    color: #fff;
+    font-size: 0.9rem;
+  }
+
+  /* MAPA PLACEHOLDER (Radar) */
+  .map-placeholder {
+    background: #000;
+    height: 150px;
+    margin: 0 20px 20px;
+    border: 2px solid var(--secondary);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--secondary);
+    font-family: var(--header-font);
+    font-size: 0.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .scan-line {
+    position: absolute;
+    width: 100%; height: 2px;
+    background: var(--secondary);
+    top: 0;
+    animation: scanRadar 3s linear infinite;
+    box-shadow: 0 0 5px var(--secondary);
+  }
+
+  /* --- ALERTAS --- */
+  .retro-alert.success {
+    background: rgba(0, 40, 20, 0.9);
+    border: 2px solid var(--success);
+    color: #aaffcc;
+    padding: 1rem;
+    border-radius: 6px;
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    box-shadow: 0 0 20px rgba(0, 255, 136, 0.2);
+  }
+
+  .alert-icon {
+    font-size: 2rem;
+    color: var(--success);
+  }
+
+  .alert-content h2 {
+    font-family: var(--header-font);
     font-size: 0.8rem;
+    margin: 0 0 5px 0;
+    color: var(--success);
+  }
+  .alert-content p { margin: 0; font-size: 0.8rem; }
+
+  /* --- ANIMACIONES --- */
+  @keyframes scrollScanlines { from { background-position: 0 0; } to { background-position: 0 100%; } }
+  
+  @keyframes textPulse {
+    from { text-shadow: 3px 3px 0 #3a1a0d, 0 0 10px var(--primary-glow); }
+    to { text-shadow: 3px 3px 0 #3a1a0d, 0 0 25px var(--primary-glow); }
   }
 
-  .animate-fade {
-    animation: pixelFade 0.6s ease-in-out;
-  }
+  @keyframes scanRadar { 0% { top: 0; } 100% { top: 100%; } }
 
-  @keyframes pixelFade {
-    0% { opacity: 0; transform: scale(0.95); }
-    100% { opacity: 1; transform: scale(1); }
-  }
+  @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes popIn { 0% { opacity: 0; transform: scale(0.9); } 100% { opacity: 1; transform: scale(1); } }
+
+  .animate-fade-up { animation: fadeInUp 0.6s ease-out both; }
+  .animate-fade-down { animation: fadeInDown 0.6s ease-out both; }
+  .animate-pop { animation: popIn 0.4s ease-out both; }
 
   /* RESPONSIVE */
   @media (max-width: 768px) {
-    .contact-container {
-      grid-template-columns: 1fr;
-      gap: 1rem;
-    }
-
-    .contact-section {
-      padding: 1.5rem;
-      margin: 1rem;
-    }
-
-    .title {
-      font-size: 1.2rem;
-    }
-
-    .subtitle {
-      font-size: 0.7rem;
-    }
-
-    input, textarea {
-      font-size: 0.65rem;
-      padding: 0.5rem;
-    }
-
-    .btn-send {
-      font-size: 0.7rem;
-      padding: 0.6rem;
-    }
-
-    .contact-info h3 {
-      font-size: 0.7rem;
-    }
-
-    .contact-info ul {
-      font-size: 0.65rem;
-    }
-  }
-
-  @media (max-width: 480px) {
-    .title {
-      font-size: 1rem;
-    }
-
-    .subtitle {
-      font-size: 0.65rem;
-    }
-
-    .contact-section {
-      padding: 1rem;
-    }
+    .contact-grid { grid-template-columns: 1fr; }
+    .title { font-size: 1.1rem; }
   }
 </style>
-
 {% endblock %}

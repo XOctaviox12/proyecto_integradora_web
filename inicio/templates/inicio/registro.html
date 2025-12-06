@@ -3,42 +3,53 @@
 {% load static %}
 
 {% block content %}
+<div class="crt-overlay"></div>
+
 <section class="register-section">
-  <div class="register-header">
-  <h1 class="title">🍬 Registro de Dulceros Rebeldes</h1>
-  <p class="subtitle">
-    ¡Únete al alumno más astuto del salón! Corre entre las butacas, reparte dulces a tus compañeros y esquiva los librazos de los profesores. 🎒📚
-  </p>
+  
+  <div class="register-header animate-fade-down">
+    <h1 class="title">🍬 REGISTRO DE REBELDES</h1>
+    <p class="subtitle">
+      <span class="highlight">Misión:</span> Repartir dulces y sobrevivir al caos escolar. 🎒
+    </p>
 
-  <!-- Contador de jugadores -->
-  <div class="contador-jugadores">
-    💥 <strong>Jugadores traviesos registrados:</strong> {{ contador }}
+    <div class="contador-jugadores">
+      <span class="icon">💥</span> 
+      <strong>AGENTES ACTIVOS:</strong> 
+      <span class="number">{{ contador }}</span>
+    </div>
   </div>
-</div>
-
 
   {% if messages %}
-    {% for message in messages %}
-      <div class="{% if message.tags == 'success' %}success-message{% else %}error-box{% endif %} animate-fade">
-        {{ message }}
-      </div>
-    {% endfor %}
-  {% endif %}
-
-  {% if registrado %}
-    <div class="success-message animate-fade">
-      <h2>🚀 Registro completado</h2>
-     <p>¡Tu cuenta ha sido creada con éxito! 🎒 Bienvenido al salón, dulcero rebelde. Prepárate para repartir dulces y esquivar librazos. 🍬📚</p>
-
+    <div class="system-messages">
+      {% for message in messages %}
+        <div class="retro-alert {% if message.tags == 'success' %}success{% else %}error{% endif %} animate-pop">
+          <span class="alert-icon">{% if message.tags == 'success' %}✔{% else %}✖{% endif %}</span>
+          {{ message }}
+        </div>
+      {% endfor %}
     </div>
   {% endif %}
 
-  <div class="register-container">
+  {% if registrado %}
+    <div class="retro-alert success animate-pop">
+      <h2>🚀 ACCESO CONCEDIDO</h2>
+      <p>Perfil creado. Bienvenido al escuadrón, dulcero. 🍬</p>
+    </div>
+  {% endif %}
+
+  <div class="register-container animate-slide-up">
+    <div class="screw top-left"></div>
+    <div class="screw top-right"></div>
+    <div class="screw bottom-left"></div>
+    <div class="screw bottom-right"></div>
+
     <form method="post" novalidate>
       {% csrf_token %}
 
       {% if form.errors %}
-        <div class="error-box">
+        <div class="retro-alert error animate-shake">
+          <strong>⚠ ERROR DE SISTEMA:</strong>
           <ul>
             {% for field in form %}
               {% for error in field.errors %}
@@ -52,220 +63,330 @@
         </div>
       {% endif %}
 
-      <!-- Campos correctos del formulario -->
       <div class="form-group">
-        <label for="{{ form.username.id_for_label }}">Nombre de usuario</label>
-        {{ form.username }}
+        <label for="{{ form.username.id_for_label }}">IDENTIFICADOR (USUARIO)</label>
+        <div class="input-wrapper">
+          {{ form.username }}
+          <div class="input-glow"></div>
+        </div>
       </div>
 
       <div class="form-group">
-        <label for="{{ form.email.id_for_label }}">Correo electrónico</label>
-        {{ form.email }}
+        <label for="{{ form.email.id_for_label }}">FRECUENCIA (EMAIL)</label>
+        <div class="input-wrapper">
+          {{ form.email }}
+          <div class="input-glow"></div>
+        </div>
       </div>
 
-      <div class="form-group">
-        <label for="{{ form.password1.id_for_label }}">Contraseña</label>
-        {{ form.password1 }}
-      </div>
+      <div class="form-row">
+        <div class="form-group half">
+          <label for="{{ form.password1.id_for_label }}">CLAVE</label>
+          <div class="input-wrapper">
+            {{ form.password1 }}
+          </div>
+        </div>
 
-      <div class="form-group">
-        <label for="{{ form.password2.id_for_label }}">Confirmar contraseña</label>
-        {{ form.password2 }}
+        <div class="form-group half">
+          <label for="{{ form.password2.id_for_label }}">CONFIRMAR CLAVE</label>
+          <div class="input-wrapper">
+            {{ form.password2 }}
+          </div>
+        </div>
       </div>
 
       <button type="submit" class="btn-send">
-        <span>Registrarme</span>
-        <i class="fas fa-user-plus"></i>
+        <span>INICIAR MISIÓN</span>
+        <i class="fas fa-gamepad"></i>
       </button>
     </form>
   </div>
 </section>
 
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Courier+Prime:wght@700&display=swap');
+
+  /* --- VARIABLES GLOBALES (Armonía Face-Bomb) --- */
+  :root {
+    --bg-dark: #140d0b;
+    --bg-card: #1e120e;
+    --primary: #ffcc00;       /* Dorado */
+    --primary-glow: rgba(255, 204, 0, 0.5);
+    --secondary: #7B3B1D;     /* Cobre */
+    --text-main: #dcb;
+    --btn-grad-start: #ffb300;
+    --btn-grad-end: #ff5500;
+    --danger: #ff4444;
+    --success: #00ff88;
+  }
 
   body {
-    background: repeating-linear-gradient(0deg,#3a2d26 0px,#3a2d26 8px,#352820 8px,#352820 16px);
-    font-family: "Press Start 2P", monospace;
-    color: #f5dba1;
+    background-color: var(--bg-dark);
+    /* Patrón de fondo sutil */
+    background-image: 
+      linear-gradient(rgba(123, 59, 29, 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(123, 59, 29, 0.05) 1px, transparent 1px);
+    background-size: 40px 40px;
+    font-family: "Press Start 2P", cursive;
+    color: var(--text-main);
     margin: 0;
     padding: 0;
+    min-height: 100vh;
   }
 
-  /* CRT Effect */
-  body::before {
-    content: "";
+  /* Scanlines CRT Animadas */
+  .crt-overlay {
     position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
+    background-size: 100% 4px;
     pointer-events: none;
-    background: repeating-linear-gradient(0deg,rgba(0,0,0,0.1) 0px,rgba(0,0,0,0.1) 1px,transparent 2px);
-    animation: flicker 0.12s infinite;
-    z-index: 9999;
+    z-index: 0;
+    opacity: 0.15;
+    animation: scrollScanlines 10s linear infinite;
   }
 
-  @keyframes flicker {
-    0%,19%,21%,23%,25%,54%,56%,100% { opacity: 0.1; }
-    20%,24%,55% { opacity: 0.25; }
-  }
-
-  /* Main Section */
   .register-section {
-    padding: 2rem 1rem;
-    text-align: center;
-    background: linear-gradient(180deg,#241a17 0%,#1b100e 100%);
-    border: 4px solid #7b3b1d;
-    box-shadow: inset 0 0 20px #000,0 0 20px rgba(255,140,0,0.3);
+    position: relative;
+    z-index: 1;
+    padding: 3rem 1rem;
+    max-width: 600px;
+    margin: 0 auto;
   }
 
-  .register-header .title {
-    font-size: 1.4rem;
-    color: #ffe67b;
-    text-shadow: 2px 2px 0 #4a260c,0 0 12px #ffb000;
+  /* --- HEADER --- */
+  .register-header {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  .title {
+    font-size: 1.5rem;
+    color: var(--primary);
+    text-shadow: 3px 3px 0 #3a1a0d, 0 0 15px var(--primary-glow);
     margin-bottom: 1rem;
-    word-break: break-word;
+    line-height: 1.4;
+    text-transform: uppercase;
+    animation: textPulse 3s infinite alternate;
   }
 
   .subtitle {
+    font-family: 'Courier Prime', monospace;
     font-size: 0.9rem;
-    color: #f0d1a6;
+    color: #cbb;
+    line-height: 1.5;
     margin-bottom: 1.5rem;
-    text-shadow: 1px 1px 0 #3a1b08;
+    background: rgba(0,0,0,0.3);
+    padding: 10px;
+    border-radius: 4px;
+    border-left: 3px solid var(--secondary);
   }
 
+  .subtitle .highlight {
+    color: var(--primary);
+  }
+
+  /* Contador HUD */
   .contador-jugadores {
-    background: #3b1e12;
-    border: 2px solid #ffb000;
     display: inline-block;
-    padding: 0.5rem 1rem;
-    border-radius: 6px;
-    color: #ffb000;
-    font-size: 0.8rem;
-    margin-bottom: 1rem;
+    background: #0f0806;
+    border: 1px solid var(--secondary);
+    padding: 0.8rem 1.2rem;
+    border-radius: 4px;
+    color: var(--primary);
+    font-size: 0.7rem;
+    box-shadow: inset 0 0 10px rgba(123, 59, 29, 0.2);
   }
 
+  .contador-jugadores .number {
+    color: #fff;
+    text-shadow: 0 0 5px var(--primary);
+  }
+
+  /* --- CONTENEDOR PRINCIPAL (Panel Arcade) --- */
   .register-container {
-    background: #261912;
-    border: 3px solid #8c4520;
-    border-radius: 8px;
-    padding: 1.5rem;
-    width: 100%;
-    max-width: 420px;
-    margin: 1.5rem auto;
-    box-shadow: 0 0 20px rgba(255,160,60,0.3);
+    background: var(--bg-card);
+    border: 3px solid var(--secondary);
+    border-radius: 12px;
+    padding: 2.5rem;
+    position: relative;
+    box-shadow: 
+      0 15px 30px rgba(0,0,0,0.7),
+      inset 0 0 40px rgba(0,0,0,0.5);
   }
 
+  /* Tornillos decorativos */
+  .screw {
+    position: absolute;
+    width: 10px; height: 10px;
+    background: #4a2311;
+    border-radius: 50%;
+    box-shadow: inset 1px 1px 1px rgba(255,255,255,0.1), 1px 1px 2px rgba(0,0,0,0.5);
+    border: 1px solid var(--secondary);
+  }
+  .top-left { top: 10px; left: 10px; }
+  .top-right { top: 10px; right: 10px; }
+  .bottom-left { bottom: 10px; left: 10px; }
+  .bottom-right { bottom: 10px; right: 10px; }
+
+  /* --- FORMULARIO --- */
   .form-group {
+    margin-bottom: 1.5rem;
     text-align: left;
-    margin-bottom: 1rem;
+  }
+
+  /* Layout de 2 columnas para passwords */
+  .form-row {
+    display: flex;
+    gap: 1rem;
+  }
+  .form-group.half {
+    flex: 1;
   }
 
   label {
     display: block;
-    font-weight: bold;
-    color: #ffcc5c;
-    margin-bottom: 0.3rem;
-    font-size: 0.7rem;
+    color: var(--primary);
+    font-size: 0.6rem;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    text-shadow: 1px 1px 0 #000;
   }
 
+  /* Estilo de Inputs */
   input[type="text"],
   input[type="email"],
   input[type="password"] {
     width: 100%;
-    padding: 0.6rem;
+    padding: 12px;
+    border: 2px solid var(--secondary);
     border-radius: 6px;
-    border: 2px solid #7b3b1d;
-    background: #1c110e;
-    color: #ffe7c2;
-    font-family: "Press Start 2P", monospace;
-    font-size: 0.7rem;
+    background: #0a0503;
+    color: #fff;
+    font-family: 'Courier Prime', monospace; /* Fuente más legible para escribir */
+    font-weight: bold;
+    font-size: 0.9rem;
     box-sizing: border-box;
+    transition: all 0.3s ease;
+    box-shadow: inset 2px 2px 5px rgba(0,0,0,0.5);
   }
 
   input:focus {
-    border-color: #ffb000;
-    box-shadow: 0 0 8px #ffb000;
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 10px var(--primary-glow);
+    background: #140a05;
   }
 
+  /* --- BOTÓN --- */
   .btn-send {
-    background: linear-gradient(90deg,#ffb000 0%,#ff4800 100%);
-    color: #2b1007;
-    border: 2px solid #803000;
-    padding: 0.8rem;
-    border-radius: 8px;
+    background: linear-gradient(180deg, var(--btn-grad-start) 0%, var(--btn-grad-end) 100%);
+    color: #2e0e05;
+    border: none;
+    padding: 1rem;
+    border-radius: 6px;
     width: 100%;
-    font-size: 0.8rem;
+    font-size: 0.85rem;
     font-family: "Press Start 2P", monospace;
     cursor: pointer;
-    text-shadow: 1px 1px 0 #ffe3b3;
+    font-weight: bold;
+    margin-top: 1rem;
+    box-shadow: 0 6px 0 #993300, 0 10px 20px rgba(0,0,0,0.4);
+    transition: transform 0.1s;
+    text-transform: uppercase;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
   }
 
   .btn-send:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 0 20px #ffb000;
+    filter: brightness(1.1);
   }
 
-  .error-box,
-  .success-message {
-    padding: 0.8rem;
+  .btn-send:active {
+    transform: translateY(4px);
+    box-shadow: 0 2px 0 #993300;
+  }
+
+  /* --- ALERTAS --- */
+  .retro-alert {
+    padding: 1rem;
     border-radius: 6px;
     font-size: 0.7rem;
-    margin-bottom: 1rem;
-    word-break: break-word;
+    margin-bottom: 1.5rem;
+    border: 2px solid;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    line-height: 1.5;
+    text-align: left;
   }
 
-  .error-box {
-    background: rgba(90,20,20,0.8);
-    border: 2px solid #ff5555;
+  .retro-alert.error {
+    background: rgba(60, 0, 0, 0.8);
+    border-color: var(--danger);
     color: #ffaaaa;
+    box-shadow: 0 0 15px rgba(255, 68, 68, 0.2);
   }
 
-  .success-message {
-    background: rgba(40,90,40,0.8);
-    border: 2px solid #00ff88;
+  .retro-alert.success {
+    background: rgba(0, 40, 20, 0.8);
+    border-color: var(--success);
     color: #aaffcc;
+    box-shadow: 0 0 15px rgba(0, 255, 136, 0.2);
   }
+
+  .retro-alert ul {
+    margin: 0;
+    padding-left: 20px;
+    list-style-type: square;
+  }
+
+  /* --- ANIMACIONES --- */
+  @keyframes scrollScanlines {
+    from { background-position: 0 0; }
+    to { background-position: 0 100%; }
+  }
+
+  @keyframes textPulse {
+    from { text-shadow: 3px 3px 0 #3a1a0d, 0 0 10px var(--primary-glow); }
+    to { text-shadow: 3px 3px 0 #3a1a0d, 0 0 25px var(--primary-glow); }
+  }
+
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes popIn {
+    0% { opacity: 0; transform: scale(0.9); }
+    100% { opacity: 1; transform: scale(1); }
+  }
+
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+    20%, 40%, 60%, 80% { transform: translateX(5px); }
+  }
+
+  /* Clases de utilidad para animaciones */
+  .animate-slide-up { animation: slideUp 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) both; }
+  .animate-fade-down { animation: fadeInDown 0.6s ease-out both; }
+  .animate-pop { animation: popIn 0.4s ease-out both; }
+  .animate-shake { animation: shake 0.5s ease-in-out; }
 
   /* RESPONSIVE */
   @media (max-width: 480px) {
-    .register-section {
-      padding: 1rem;
-    }
-
-    .register-header .title {
-      font-size: 1.1rem;
-    }
-
-    .subtitle {
-      font-size: 0.7rem;
-    }
-
-    .contador-jugadores {
-      font-size: 0.7rem;
-      padding: 0.4rem 0.8rem;
-    }
-
-    .register-container {
-      padding: 1rem;
-      margin: 1rem auto;
-    }
-
-    label {
-      font-size: 0.6rem;
-    }
-
-    input[type="text"],
-    input[type="email"],
-    input[type="password"] {
-      font-size: 0.6rem;
-      padding: 0.5rem;
-    }
-
-    .btn-send {
-      font-size: 0.7rem;
-      padding: 0.6rem;
-    }
+    .register-container { padding: 1.5rem; }
+    .title { font-size: 1.1rem; }
+    .form-row { flex-direction: column; gap: 0; }
+    input { font-size: 0.8rem; }
   }
 </style>
-
 {% endblock %}
