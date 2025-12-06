@@ -10,78 +10,87 @@
   <div class="intro animate-fade-down">
     <h1 class="title">EQUIPO CREATIVO</h1>
     <p class="subtitle">
-      Conoce a los genios detrás de <span class="highlight">FACE-BOMB</span> 💣. 
-      De mochilas llenas de ideas a una aventura épica. 🍬📘
+      Conoce a los arquitectos del caos en <span class="highlight">FACE-BOMB</span>. 
+      <br>Expedientes clasificados desbloqueados. 🔓
     </p>
   </div>
 
   <div class="creators-grid">
     {% for p in creators %}
-      <div class="creator-card animate-fade-up" style="animation-delay: {{ forloop.counter0 }}00ms;">
+      <div class="retro-panel creator-card animate-fade-up" style="animation-delay: {{ forloop.counter0 }}00ms;">
         
-        <div class="avatar-wrapper">
-          <div class="creator-avatar">
-            {% if p.image %}
-              <img src="{{ p.image.url }}" alt="{{ p.name }}">
-            {% else %}
-              <img src="{% static 'images/default-avatar.png' %}" alt="Avatar genérico">
-            {% endif %}
-          </div>
-          <div class="avatar-glow"></div>
-        </div>
+        <div class="screw top-left"></div>
+        <div class="screw top-right"></div>
+        <div class="screw bottom-left"></div>
+        <div class="screw bottom-right"></div>
 
-        <div class="creator-info">
-          <h3 class="creator-name">{{ p.name }}</h3>
-          <p class="creator-role">{{ p.role }}</p>
-          
-          <div class="bio-box">
-            <p class="creator-bio">{{ p.bio }}</p>
+        <div class="card-body">
+          <div class="avatar-container">
+            <div class="avatar-frame">
+              {% if p.image %}
+                <img src="{{ p.image.url }}" alt="{{ p.name }}">
+              {% else %}
+                <img src="{% static 'images/default-avatar.png' %}" alt="Avatar genérico">
+              {% endif %}
+              <div class="scan-overlay"></div>
+            </div>
+            <div class="status-light" title="Estado: Activo"></div>
           </div>
 
-          {% if p.twitter or p.github or p.instagram %}
-          <div class="social-links">
-            {% if p.twitter %}
-              <a href="{{ p.twitter }}" target="_blank" class="social-icon twitter" title="Twitter">
-                <i class="fab fa-twitter"></i> </a>
-            {% endif %}
-            {% if p.github %}
-              <a href="{{ p.github }}" target="_blank" class="social-icon github" title="GitHub">
-                <i class="fab fa-github"></i>
-              </a>
-            {% endif %}
-            {% if p.instagram %}
-              <a href="{{ p.instagram }}" target="_blank" class="social-icon instagram" title="Instagram">
-                <i class="fab fa-instagram"></i>
-              </a>
+          <div class="creator-info">
+            <h3 class="creator-name">{{ p.name }}</h3>
+            <div class="role-badge">{{ p.role }}</div>
+            
+            <div class="bio-terminal">
+              <p class="creator-bio">
+                <span class="prompt">></span> {{ p.bio }}<span class="cursor">_</span>
+              </p>
+            </div>
+
+            {% if p.twitter or p.github or p.instagram %}
+            <div class="social-links">
+              {% if p.twitter %}
+                <a href="{{ p.twitter }}" target="_blank" class="social-btn" title="Twitter">
+                  <i class="fab fa-twitter"></i>
+                </a>
+              {% endif %}
+              {% if p.github %}
+                <a href="{{ p.github }}" target="_blank" class="social-btn" title="GitHub">
+                  <i class="fab fa-github"></i>
+                </a>
+              {% endif %}
+              {% if p.instagram %}
+                <a href="{{ p.instagram }}" target="_blank" class="social-btn" title="Instagram">
+                  <i class="fab fa-instagram"></i>
+                </a>
+              {% endif %}
+            </div>
             {% endif %}
           </div>
-          {% endif %}
         </div>
-        
-        <div class="corner top-left"></div>
-        <div class="corner top-right"></div>
-        <div class="corner bottom-left"></div>
-        <div class="corner bottom-right"></div>
       </div>
     {% endfor %}
   </div>
 
-  <section class="vision-section animate-fade-up">
-    <div class="vision-header">
-      <h2>NUESTRA VISIÓN</h2>
+  <div class="retro-panel vision-panel animate-fade-up">
+    <div class="panel-header-bar">DIRECTIVA PRINCIPAL (VISIÓN)</div>
+    <div class="vision-content">
+      <p>
+        Crear experiencias interactivas que inspiren, emocionen y conecten a las personas a través del arte digital,
+        la narrativa y la tecnología. En <strong class="gold">Face-Bomb</strong> creemos que cada historia puede ser
+        un universo por descubrir.
+      </p>
     </div>
-    <p>
-      Crear experiencias interactivas que inspiren, emocionen y conecten a las personas a través del arte digital,
-      la narrativa y la tecnología. En <strong>Face-Bomb</strong> creemos que cada historia puede ser
-      un universo por descubrir.
-    </p>
-  </section>
+    <div class="screw top-left"></div>
+    <div class="screw top-right"></div>
+    <div class="screw bottom-left"></div>
+    <div class="screw bottom-right"></div>
+  </div>
+
 </section>
 
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Courier+Prime:wght@400;700&display=swap');
-  /* (Opcional) Importar FontAwesome para iconos sociales si no lo tienes en base.html */
-  @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css');
 
   /* --- VARIABLES GLOBALES (Armonía Face-Bomb) --- */
   :root {
@@ -93,6 +102,8 @@
     --text-main: #dcb;
     --header-font: "Press Start 2P", cursive;
     --body-font: "Courier Prime", monospace;
+    --btn-grad-start: #ffb300;
+    --btn-grad-end: #ff5500;
   }
 
   body {
@@ -122,10 +133,11 @@
     padding: 3rem 1rem;
     max-width: 1100px;
     margin: 0 auto;
-    text-align: center;
   }
 
-  /* --- INTRO --- */
+  /* --- HEADER --- */
+  .intro { text-align: center; margin-bottom: 3rem; }
+
   .title {
     font-family: var(--header-font);
     font-size: 1.8rem;
@@ -140,11 +152,11 @@
     font-size: 0.9rem;
     color: #cbb;
     max-width: 700px;
-    margin: 0 auto 3rem;
+    margin: 0 auto;
     line-height: 1.6;
   }
 
-  .highlight { color: var(--primary); font-weight: bold; }
+  .highlight { color: var(--primary); font-weight: bold; border-bottom: 2px dashed var(--secondary); }
 
   /* --- GRID --- */
   .creators-grid {
@@ -154,84 +166,91 @@
     margin-bottom: 4rem;
   }
 
-  /* --- TARJETA DE CREADOR --- */
-  .creator-card {
+  /* --- TARJETA RETRO (Ficha de Personal) --- */
+  .retro-panel {
     background: var(--bg-card);
     border: 3px solid var(--secondary);
-    border-radius: 12px;
-    padding: 2rem 1.5rem;
+    border-radius: 8px;
+    box-shadow: 
+      0 10px 25px rgba(0,0,0,0.6),
+      inset 0 0 40px rgba(0,0,0,0.3);
     position: relative;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.6);
-    transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    overflow: visible; /* Para los tornillos */
+    transition: transform 0.3s, border-color 0.3s;
   }
 
   .creator-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 15px 35px rgba(0,0,0,0.8), 0 0 15px rgba(255, 204, 0, 0.2);
+    transform: translateY(-5px);
     border-color: var(--primary);
   }
 
-  /* Decoración esquinas */
-  .corner {
-    position: absolute; width: 10px; height: 10px;
-    border: 2px solid var(--secondary);
-    transition: border-color 0.3s;
+  .card-body {
+    padding: 2rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
   }
-  .creator-card:hover .corner { border-color: var(--primary); }
-  
-  .top-left { top: -2px; left: -2px; border-right: none; border-bottom: none; }
-  .top-right { top: -2px; right: -2px; border-left: none; border-bottom: none; }
-  .bottom-left { bottom: -2px; left: -2px; border-right: none; border-top: none; }
-  .bottom-right { bottom: -2px; right: -2px; border-left: none; border-top: none; }
+
+  /* Tornillos */
+  .screw {
+    position: absolute; width: 8px; height: 8px;
+    background: #4a2311; border-radius: 50%; 
+    box-shadow: inset 1px 1px 1px rgba(255,255,255,0.2);
+    border: 1px solid #221;
+    z-index: 2;
+  }
+  .top-left { top: 10px; left: 10px; }
+  .top-right { top: 10px; right: 10px; }
+  .bottom-left { bottom: 10px; left: 10px; }
+  .bottom-right { bottom: 10px; right: 10px; }
 
   /* --- AVATAR --- */
-  .avatar-wrapper {
+  .avatar-container {
     position: relative;
-    width: 140px; height: 140px;
     margin-bottom: 1.5rem;
   }
 
-  .creator-avatar {
-    width: 100%; height: 100%;
+  .avatar-frame {
+    width: 130px; height: 130px;
     border-radius: 50%;
-    border: 3px solid var(--secondary);
-    padding: 5px; /* Espacio entre borde e imagen */
+    border: 4px solid var(--secondary);
+    padding: 4px;
     background: #0f0806;
     overflow: hidden;
-    transition: border-color 0.3s;
+    position: relative;
+    transition: border-color 0.3s, box-shadow 0.3s;
   }
 
-  .creator-card:hover .creator-avatar {
+  .creator-card:hover .avatar-frame {
     border-color: var(--primary);
+    box-shadow: 0 0 15px var(--primary-glow);
   }
 
-  .creator-avatar img {
+  .avatar-frame img {
     width: 100%; height: 100%;
-    object-fit: cover; /* Recorte circular perfecto */
     border-radius: 50%;
-    filter: sepia(0.2) contrast(1.1);
+    object-fit: cover;
+    filter: sepia(0.3) contrast(1.1);
     transition: filter 0.3s;
   }
 
-  .creator-card:hover .creator-avatar img {
+  .creator-card:hover .avatar-frame img {
     filter: sepia(0) contrast(1.2);
   }
 
-  /* Resplandor tras el avatar */
-  .avatar-glow {
-    position: absolute; top: 50%; left: 50%;
-    width: 100%; height: 100%;
-    transform: translate(-50%, -50%);
+  /* Luz de estado */
+  .status-light {
+    position: absolute;
+    bottom: 5px; right: 5px;
+    width: 16px; height: 16px;
+    background: #00ff88;
+    border: 2px solid var(--bg-card);
     border-radius: 50%;
-    box-shadow: 0 0 20px var(--primary-glow);
-    opacity: 0;
-    transition: opacity 0.3s;
-    z-index: -1;
+    box-shadow: 0 0 8px #00ff88;
+    z-index: 5;
+    animation: blink 2s infinite;
   }
-  .creator-card:hover .avatar-glow { opacity: 1; }
 
   /* --- INFO --- */
   .creator-name {
@@ -243,98 +262,113 @@
     text-shadow: 2px 2px 0 #000;
   }
 
-  .creator-role {
-    font-size: 0.75rem;
+  .role-badge {
+    display: inline-block;
+    font-size: 0.65rem;
+    background: #000;
     color: var(--primary);
-    font-weight: bold;
+    padding: 4px 8px;
+    border-radius: 4px;
+    border: 1px solid var(--secondary);
     margin-bottom: 1rem;
+    font-weight: bold;
     text-transform: uppercase;
-    letter-spacing: 1px;
   }
 
-  .bio-box {
-    background: rgba(0,0,0,0.3);
+  .bio-terminal {
+    background: #0a0504;
+    border: 1px solid var(--secondary);
+    border-radius: 4px;
     padding: 10px;
-    border-radius: 6px;
-    border-left: 2px solid var(--secondary);
-    margin-bottom: 1rem;
     width: 100%;
+    min-height: 80px;
+    margin-bottom: 1.2rem;
+    text-align: left;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
   }
 
   .creator-bio {
     font-size: 0.75rem;
-    line-height: 1.5;
+    line-height: 1.4;
     margin: 0;
     color: #ccc;
   }
 
-  /* --- SOCIAL --- */
+  .prompt { color: var(--primary); margin-right: 5px; }
+  .cursor { animation: blink 1s infinite; color: var(--primary); }
+
+  /* --- SOCIAL BUTTONS --- */
   .social-links {
     display: flex;
-    gap: 15px;
-    margin-top: 1rem;
+    justify-content: center;
+    gap: 12px;
   }
 
-  .social-icon {
-    color: var(--text-main);
-    font-size: 1.2rem;
-    transition: color 0.2s, transform 0.2s;
+  .social-btn {
+    width: 36px; height: 36px;
+    background: #2e140a;
+    border: 1px solid var(--secondary);
+    border-radius: 4px;
+    display: flex; align-items: center; justify-content: center;
+    color: #dcb;
+    font-size: 1.1rem;
     text-decoration: none;
+    transition: all 0.2s;
+    box-shadow: 0 2px 0 #1a0a05;
   }
 
-  .social-icon:hover {
-    color: var(--primary);
-    transform: scale(1.2);
-    text-shadow: 0 0 8px var(--primary);
+  .social-btn:hover {
+    background: var(--primary);
+    color: #000;
+    border-color: var(--primary);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 0 var(--secondary);
   }
 
-  /* --- VISIÓN --- */
-  .vision-section {
-    background: var(--bg-card);
-    border: 3px solid var(--secondary);
-    border-radius: 12px;
-    padding: 2.5rem;
-    position: relative;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.6);
-    max-width: 800px;
-    margin: 0 auto;
+  /* --- VISION PANEL --- */
+  .vision-panel {
+    margin-top: 2rem;
   }
 
-  .vision-header h2 {
+  .panel-header-bar {
+    background: rgba(0,0,0,0.3);
+    border-bottom: 2px dashed var(--secondary);
+    padding: 12px;
+    text-align: center;
     font-family: var(--header-font);
-    color: var(--primary);
-    font-size: 1.2rem;
-    margin: 0 0 1.5rem;
-    text-shadow: 2px 2px 0 #000;
-    text-transform: uppercase;
+    font-size: 0.75rem;
+    color: var(--secondary);
+    letter-spacing: 1px;
   }
 
-  .vision-section p {
-    font-size: 0.9rem;
-    line-height: 1.6;
+  .vision-content {
+    padding: 2.5rem;
+    text-align: center;
+  }
+
+  .vision-content p {
+    font-size: 0.95rem;
+    line-height: 1.8;
     color: #fff;
   }
 
-  /* --- ANIMACIONES --- */
-  @keyframes scrollScanlines {
-    from { background-position: 0 0; }
-    to { background-position: 0 100%; }
-  }
+  .gold { color: var(--primary); }
 
+  /* --- ANIMACIONES --- */
+  @keyframes scrollScanlines { from { background-position: 0 0; } to { background-position: 0 100%; } }
+  
   @keyframes textPulse {
     from { text-shadow: 3px 3px 0 #3a1a0d, 0 0 10px var(--primary-glow); }
     to { text-shadow: 3px 3px 0 #3a1a0d, 0 0 25px var(--primary-glow); }
   }
 
-  @keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
+  @keyframes blink { 
+    0%, 100% { opacity: 1; } 
+    50% { opacity: 0; } 
   }
 
-  @keyframes fadeInDown {
-    from { opacity: 0; transform: translateY(-20px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
+  @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
 
   .animate-fade-up { animation: fadeInUp 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) both; }
   .animate-fade-down { animation: fadeInDown 0.6s ease-out both; }
@@ -342,8 +376,8 @@
   /* RESPONSIVE */
   @media (max-width: 480px) {
     .title { font-size: 1.4rem; }
-    .creator-card { padding: 1.5rem 1rem; }
-    .avatar-wrapper { width: 110px; height: 110px; }
+    .creator-card { padding: 1rem; }
+    .avatar-frame { width: 100px; height: 100px; }
   }
 </style>
 {% endblock %}

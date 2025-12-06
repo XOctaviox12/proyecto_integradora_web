@@ -7,11 +7,11 @@
 <div class="hero animate-fade-down">
   <div class="hero-overlay">
     <div class="hero-text">
-      <h1 class="title">FACE-BOMB</h1>
+      <h1 class="title glitch" data-text="FACE-BOMB">FACE-BOMB</h1>
       <p class="subtitle">
         <span class="highlight">MISIÓN:</span> DESAFÍA AL SISTEMA ACADÉMICO.
       </p>
-      <div class="hero-badge">VENDEDOR CLANDESTINO</div>
+      <div class="hero-badge bounce">VENDEDOR CLANDESTINO</div>
     </div>
   </div>
 </div>
@@ -37,16 +37,16 @@
     <div class="video-frame">
       <div class="video-container">
         <iframe src="https://www.youtube.com/embed/04eiI-98CEE?si=n6cOjowQvQIuRAdd" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <div class="video-scanline"></div>
       </div>
-      <div class="scanline"></div>
     </div>
   </section>
 
-  <section class="characters-section animate-fade-up">
-    <h2 class="section-title-standalone">PERSONAJES</h2>
+  <section class="characters-section">
+    <h2 class="section-title-standalone animate-fade-up">PERSONAJES</h2>
     <div class="characters-grid">
       {% for c in characters %}
-        <div class="character-card">
+        <div class="character-card animate-pop-in" style="animation-delay: {{ forloop.counter0 }}50ms;">
           <div class="char-img-wrapper">
             <img src="{{ c.image.url }}" alt="{{ c.name }}" class="character-img">
           </div>
@@ -65,22 +65,25 @@
   <section class="gameplay-section animate-fade-up">
     <h2 class="section-title-standalone">MECÁNICAS DE JUEGO</h2>
     <div class="gameplay-cards">
-      <div class="gameplay-card warning">
-        <div class="card-icon">📚</div>
+      
+      <div class="gameplay-card warning hover-shiver">
+        <div class="card-icon icon-bounce">📚</div>
         <h3>ESQUIVAR LIBRAZOS</h3>
         <p>
           Los profesores lanzarán libros con precisión quirúrgica. Usa tus reflejos para mantener tus vidas intactas.
         </p>
       </div>
-      <div class="gameplay-card success">
-        <div class="card-icon">🍬</div>
+      
+      <div class="gameplay-card success hover-pulse">
+        <div class="card-icon icon-spin">🍬</div>
         <h3>ENTREGA SECRETA</h3>
         <p>
           Muévete entre las butacas y pasa los dulces sin ser visto. Cada venta te acerca a la victoria.
         </p>
       </div>
-      <div class="gameplay-card danger">
-        <div class="card-icon">👁️</div>
+      
+      <div class="gameplay-card danger hover-shake">
+        <div class="card-icon icon-pulse">👁️</div>
         <h3>SOBREVIVE AL AULA</h3>
         <p>
           La tensión aumenta con cada mirada del profesor. Planea tu ruta y demuestra que eres el maestro del contrabando.
@@ -112,16 +115,18 @@
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Courier+Prime:wght@400;700&display=swap');
 
-  /* --- VARIABLES (Armonía Face-Bomb) --- */
+  /* --- VARIABLES --- */
   :root {
     --bg-dark: #140d0b;
     --bg-card: #1e120e;
     --primary: #ffcc00;       /* Dorado */
     --primary-glow: rgba(255, 204, 0, 0.5);
     --secondary: #7B3B1D;     /* Cobre */
-    --text-main: #dcb;        /* Beige */
+    --text-main: #dcb;
     --header-font: "Press Start 2P", cursive;
     --body-font: "Courier Prime", monospace;
+    --danger: #ff4444;
+    --success: #00ff88;
   }
 
   body {
@@ -136,21 +141,18 @@
     margin: 0; padding: 0;
   }
 
-  /* Scanlines CRT */
+  /* Scanlines CRT Global */
   .crt-overlay {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
     background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%);
     background-size: 100% 4px;
     pointer-events: none; z-index: 999; opacity: 0.2;
-    animation: scrollScanlines 10s linear infinite;
+    animation: scrollScanlines 5s linear infinite;
   }
 
   /* --- HERO BANNER --- */
   .hero {
-    position: relative;
-    height: 400px;
-    background: #000; /* Fallback */
-    /* Imagen de fondo opcional o degradado */
+    position: relative; height: 400px;
     background: radial-gradient(circle at center, #2e1810 0%, #0f0806 100%);
     border-bottom: 6px solid var(--secondary);
     box-shadow: 0 10px 30px rgba(0,0,0,0.8);
@@ -158,68 +160,60 @@
   }
 
   .hero-overlay {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    background: rgba(0,0,0,0.3);
+    display: flex; align-items: center; justify-content: center;
+    height: 100%; background: rgba(0,0,0,0.3);
   }
 
-  .hero-text {
-    text-align: center;
-    max-width: 800px;
-    padding: 20px;
-  }
+  .hero-text { text-align: center; max-width: 800px; padding: 20px; }
 
-  .hero .title {
+  /* Título con Glitch */
+  .title {
     font-family: var(--header-font);
     font-size: clamp(2rem, 5vw, 3.5rem);
     color: var(--primary);
     text-shadow: 4px 4px 0 #3a1a0d, 0 0 20px var(--primary-glow);
-    margin-bottom: 1rem;
-    text-transform: uppercase;
+    margin-bottom: 1rem; text-transform: uppercase;
+    position: relative;
     animation: textPulse 3s infinite alternate;
   }
 
-  .hero .subtitle {
-    font-size: 1rem;
-    color: #fff;
-    text-shadow: 2px 2px 0 #000;
-    margin-bottom: 1.5rem;
+  .glitch:hover { animation: glitch-anim 0.3s infinite; }
+  .glitch::before, .glitch::after {
+    content: attr(data-text); position: absolute; top: 0; left: 0; opacity: 0.8; pointer-events: none;
   }
+  .glitch::before { color: var(--danger); z-index: -1; animation: glitch-anim2 0.4s infinite; }
+  .glitch::after { color: var(--success); z-index: -2; animation: glitch-anim3 0.6s infinite; }
 
-  .hero .highlight { color: var(--primary); font-weight: bold; }
+
+  .subtitle { font-size: 1rem; color: #fff; text-shadow: 2px 2px 0 #000; margin-bottom: 1.5rem; }
+  .highlight { color: var(--primary); font-weight: bold; }
 
   .hero-badge {
-    display: inline-block;
-    background: #d32f2f;
-    color: #fff;
-    font-family: var(--header-font);
-    font-size: 0.7rem;
-    padding: 8px 15px;
-    border-radius: 4px;
-    border: 2px solid #fff;
+    display: inline-block; background: #d32f2f; color: #fff;
+    font-family: var(--header-font); font-size: 0.7rem;
+    padding: 8px 15px; border-radius: 4px; border: 2px solid #fff;
     box-shadow: 4px 4px 0 rgba(0,0,0,0.5);
     transform: rotate(-2deg);
   }
+  .bounce { animation: bounce 2s infinite; }
 
   /* --- CONTENEDOR PRINCIPAL --- */
   .main-container {
-    max-width: 1000px;
-    margin: -50px auto 0; /* Solapamiento */
-    padding: 0 20px 40px;
-    position: relative;
-    z-index: 10;
+    max-width: 1000px; margin: -50px auto 0; padding: 0 20px 40px;
+    position: relative; z-index: 10;
   }
 
-  /* --- PANELES RETRO (Cajas con borde) --- */
+  /* --- PANELES RETRO --- */
   .retro-panel {
-    background: var(--bg-card);
-    border: 3px solid var(--secondary);
-    border-radius: 8px;
-    margin-bottom: 3rem;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.6);
-    position: relative;
+    background: var(--bg-card); border: 3px solid var(--secondary);
+    border-radius: 8px; margin-bottom: 3rem;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.6); position: relative;
+    transition: all 0.3s ease;
+  }
+  /* Panel Hover Glow */
+  .retro-panel:hover {
+    border-color: var(--primary);
+    box-shadow: 0 0 20px rgba(255, 204, 0, 0.2), inset 0 0 20px rgba(0,0,0,0.5);
   }
 
   /* Tornillos */
@@ -227,228 +221,151 @@
     content: ''; position: absolute; top: 10px; width: 8px; height: 8px;
     background: #4a2311; border-radius: 50%; box-shadow: inset 1px 1px 1px rgba(255,255,255,0.2);
   }
-  .retro-panel::before { left: 10px; }
-  .retro-panel::after { right: 10px; }
+  .retro-panel::before { left: 10px; } .retro-panel::after { right: 10px; }
 
   .panel-header {
-    background: rgba(0,0,0,0.2);
-    border-bottom: 2px dashed var(--secondary);
-    padding: 1rem;
-    text-align: center;
+    background: rgba(0,0,0,0.2); border-bottom: 2px dashed var(--secondary);
+    padding: 1rem; text-align: center;
   }
-
   .section-title {
-    font-family: var(--header-font);
-    color: var(--primary);
-    font-size: 1rem;
-    margin: 0;
-    text-shadow: 2px 2px 0 #000;
+    font-family: var(--header-font); color: var(--primary);
+    font-size: 1rem; margin: 0; text-shadow: 2px 2px 0 #000;
   }
-
   .panel-content { padding: 1.5rem; }
-
-  .history-text {
-    font-size: 0.9rem;
-    text-align: justify;
-    color: #fff;
-  }
+  .history-text { font-size: 0.9rem; text-align: justify; color: #fff; }
 
   /* --- VIDEO --- */
   .video-section { text-align: center; padding-bottom: 1.5rem; }
   .section-subtitle { font-size: 0.8rem; color: #aaa; margin: 1rem 0; font-style: italic; }
-  
   .video-frame {
-    position: relative;
-    margin: 0 1.5rem;
-    border: 4px solid #000;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 0 20px rgba(255, 204, 0, 0.1);
+    position: relative; margin: 0 1.5rem; border: 4px solid #000;
+    border-radius: 8px; overflow: hidden; box-shadow: 0 0 20px rgba(255, 204, 0, 0.1);
   }
-
-  .video-container {
-    position: relative;
-    padding-bottom: 56.25%; /* 16:9 */
-    height: 0;
-  }
+  .video-container { position: relative; padding-bottom: 56.25%; height: 0; }
+  .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
   
-  .video-container iframe {
+  /* Scanline de Video Mejorada */
+  .video-scanline {
     position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-  }
-
-  .scanline {
-    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-    background: linear-gradient(to bottom, transparent 50%, rgba(0,0,0,0.3) 50%);
-    background-size: 100% 4px;
-    pointer-events: none;
+    background: linear-gradient(to bottom, transparent 40%, rgba(255, 204, 0, 0.2) 50%, transparent 60%);
+    background-size: 100% 200%;
+    pointer-events: none; z-index: 2;
+    animation: videoScan 3s linear infinite;
   }
 
   /* --- PERSONAJES --- */
   .section-title-standalone {
-    font-family: var(--header-font);
-    color: #fff;
-    text-align: center;
-    font-size: 1.2rem;
-    margin: 3rem 0 1.5rem;
-    text-shadow: 3px 3px 0 var(--secondary);
+    font-family: var(--header-font); color: #fff; text-align: center;
+    font-size: 1.2rem; margin: 3rem 0 1.5rem; text-shadow: 3px 3px 0 var(--secondary);
   }
-
   .characters-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;
   }
-
   .character-card {
-    background: #2e1810;
-    border: 2px solid var(--secondary);
-    border-radius: 8px;
-    overflow: hidden;
-    transition: transform 0.3s, box-shadow 0.3s;
+    background: #2e1810; border: 2px solid var(--secondary);
+    border-radius: 8px; overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+    opacity: 0; /* Para la animación de entrada */
   }
-
   .character-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 0 20px rgba(255, 204, 0, 0.3);
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.5), 0 0 20px rgba(255, 204, 0, 0.4);
     border-color: var(--primary);
   }
-
   .char-img-wrapper {
-    background: #000;
-    border-bottom: 2px solid var(--secondary);
-    padding: 10px;
-    text-align: center;
+    background: #000; border-bottom: 2px solid var(--secondary);
+    padding: 10px; text-align: center;
+    transition: border-color 0.3s;
   }
-
+  .character-card:hover .char-img-wrapper { border-color: var(--primary); }
+  
   .character-img {
-    width: 100%; height: 220px;
-    object-fit: contain;
+    width: 100%; height: 220px; object-fit: contain;
     filter: drop-shadow(0 0 5px rgba(0,0,0,0.5));
+    transition: transform 0.3s;
   }
+  .character-card:hover .character-img { transform: scale(1.05); }
 
   .char-info { padding: 1rem; }
-
   .card-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 0.5rem;
-    border-bottom: 1px dashed #664422;
-    padding-bottom: 5px;
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 0.5rem; border-bottom: 1px dashed #664422; padding-bottom: 5px;
   }
-
-  .card-header h3 {
-    font-family: var(--header-font);
-    font-size: 0.8rem;
-    color: var(--primary);
-    margin: 0;
-  }
-
-  .role-badge {
-    font-size: 0.6rem;
-    background: #000;
-    color: #fff;
-    padding: 3px 6px;
-    border-radius: 3px;
-    border: 1px solid #664422;
-  }
-
+  .card-header h3 { font-family: var(--header-font); font-size: 0.8rem; color: var(--primary); margin: 0; }
+  .role-badge { font-size: 0.6rem; background: #000; color: #fff; padding: 3px 6px; border-radius: 3px; border: 1px solid #664422; }
   .desc { font-size: 0.75rem; color: #ccc; margin: 0; }
 
-  /* --- GAMEPLAY --- */
+  /* --- GAMEPLAY INTERACTIVO --- */
   .gameplay-cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 15px;
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px;
   }
-
   .gameplay-card {
-    background: rgba(0,0,0,0.4);
-    border-left: 4px solid;
-    border-radius: 4px;
-    padding: 1.2rem;
-    position: relative;
+    background: rgba(0,0,0,0.4); border-left: 4px solid;
+    border-radius: 4px; padding: 1.2rem; position: relative;
+    transition: all 0.3s ease;
   }
+  .gameplay-card h3 { font-family: var(--header-font); font-size: 0.8rem; margin: 0.5rem 0; color: #fff; }
+  .card-icon { font-size: 1.5rem; margin-bottom: 5px; display: inline-block; transition: transform 0.3s; }
 
-  .gameplay-card h3 {
-    font-family: var(--header-font);
-    font-size: 0.8rem;
-    margin: 0.5rem 0;
-    color: #fff;
-  }
+  /* Tipos de Tarjeta y sus Animaciones Hover */
+  .warning { border-color: var(--primary); }
+  .hover-shiver:hover { animation: tilt-shiver 0.5s infinite; background: rgba(255, 204, 0, 0.1); }
+  .hover-shiver:hover .icon-bounce { animation: bounce 0.5s infinite; }
 
-  .card-icon { font-size: 1.5rem; margin-bottom: 5px; }
+  .success { border-color: var(--success); }
+  .hover-pulse:hover { animation: gold-pulse 1.5s infinite; background: rgba(0, 255, 136, 0.1); }
+  .hover-pulse:hover .icon-spin { animation: spin 1s linear infinite; }
 
-  .warning { border-color: #ffcc00; }
-  .success { border-color: #00ff88; }
-  .danger { border-color: #ff4444; }
+  .danger { border-color: var(--danger); }
+  .hover-shake:hover { animation: nervous-shake 0.3s infinite; background: rgba(255, 68, 68, 0.1); }
+  .hover-shake:hover .icon-pulse { animation: pulse-fast 0.5s infinite; }
+
 
   /* --- NOTICIAS --- */
-  .updates-list {
-    list-style: none;
-    padding: 1.5rem;
-    margin: 0;
-  }
-
-  .updates-list li {
-    margin-bottom: 1rem;
-    padding-bottom: 1rem;
-    border-bottom: 1px dashed #442211;
-    font-size: 0.85rem;
-  }
+  .updates-list { list-style: none; padding: 1.5rem; margin: 0; }
+  .updates-list li { margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px dashed #442211; font-size: 0.85rem; transition: transform 0.2s; }
+  .updates-list li:hover { transform: translateX(5px); color: var(--text-highlight); }
   .updates-list li:last-child { border-bottom: none; margin-bottom: 0; }
-
   .bullet { color: var(--primary); margin-right: 5px; }
 
   /* --- CONTADOR --- */
   .contador-visitas {
-    text-align: center;
-    background: #0f0806;
-    border: 1px solid var(--secondary);
-    padding: 1rem;
-    border-radius: 6px;
-    color: #886;
-    font-size: 0.8rem;
-    margin-top: 3rem;
-    font-family: var(--body-font);
+    text-align: center; background: #0f0806; border: 1px solid var(--secondary);
+    padding: 1rem; border-radius: 6px; color: #886; font-size: 0.8rem;
+    margin-top: 3rem; font-family: var(--body-font);
+    box-shadow: 0 0 15px rgba(0,0,0,0.5);
   }
+  .contador-visitas .number { color: var(--primary); font-weight: bold; font-size: 1rem; }
 
-  .contador-visitas .number {
-    color: var(--primary);
-    font-weight: bold;
-    font-size: 1rem;
-  }
-
-  /* --- ANIMACIONES --- */
-  .animate-fade-down { animation: fadeInDown 0.8s ease-out; }
-  .animate-fade-up { animation: fadeInUp 0.8s ease-out; }
+  /* --- KEYFRAMES Y CLASES DE ANIMACIÓN --- */
+  .animate-fade-down { animation: fadeInDown 0.8s ease-out both; }
+  .animate-fade-up { animation: fadeInUp 0.8s ease-out both; }
+  .animate-pop-in { animation: popIn 0.6s cubic-bezier(0.25, 0.8, 0.25, 1) both; }
   .animate-pulse { animation: pulse 2s infinite; }
 
-  @keyframes fadeInDown {
-    from { opacity: 0; transform: translateY(-30px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
+  @keyframes fadeInDown { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes popIn { from { opacity: 0; transform: scale(0.8) translateY(20px); } to { opacity: 1; transform: scale(1) translateY(0); } }
+  
+  @keyframes scrollScanlines { from { background-position: 0 0; } to { background-position: 0 100%; } }
+  @keyframes videoScan { 0% { background-position: 0 0; } 100% { background-position: 0 200%; } }
+  
+  @keyframes textPulse { from { text-shadow: 4px 4px 0 #3a1a0d, 0 0 10px var(--primary-glow); } to { text-shadow: 4px 4px 0 #3a1a0d, 0 0 25px var(--primary-glow); } }
+  @keyframes pulse { 0%, 100% { opacity: 0.7; transform: scale(1); } 50% { opacity: 1; transform: scale(1.02); } }
+  @keyframes pulse-fast { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.15); } }
+  @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+  @keyframes spin { 100% { transform: rotate(360deg); } }
 
-  @keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
+  /* Glitch Effects */
+  @keyframes glitch-anim { 0% { transform: translate(0); } 20% { transform: translate(-3px, 3px); } 40% { transform: translate(-3px, -3px); } 60% { transform: translate(3px, 3px); } 80% { transform: translate(3px, -3px); } 100% { transform: translate(0); } }
+  @keyframes glitch-anim2 { 0% { clip: rect(0, 9999px, 0, 0); } 25% { clip: rect(20px, 9999px, 60px, 0); transform: translate(-4px, 0); } 50% { clip: rect(80px, 9999px, 100px, 0); transform: translate(4px, 0); } 75% { clip: rect(120px, 9999px, 140px, 0); transform: translate(-4px, 0); } 100% { clip: rect(0, 9999px, 0, 0); } }
+  @keyframes glitch-anim3 { 0% { clip: rect(0, 9999px, 0, 0); } 33% { clip: rect(40px, 9999px, 80px, 0); transform: translate(4px, 0); } 66% { clip: rect(90px, 9999px, 120px, 0); transform: translate(-4px, 0); } 100% { clip: rect(0, 9999px, 0, 0); } }
 
-  @keyframes scrollScanlines {
-    from { background-position: 0 0; }
-    to { background-position: 0 100%; }
-  }
+  /* Hover Interactions */
+  @keyframes tilt-shiver { 0% { transform: rotate(0deg) translateX(0); } 25% { transform: rotate(1deg) translateX(1px); } 75% { transform: rotate(-1deg) translateX(-1px); } 100% { transform: rotate(0deg) translateX(0); } }
+  @keyframes nervous-shake { 0%, 100% { transform: translateX(0); } 10%, 30%, 50%, 70%, 90% { transform: translateX(-2px); } 20%, 40%, 60%, 80% { transform: translateX(2px); } }
+  @keyframes gold-pulse { 0% { box-shadow: 0 0 0 0 rgba(255, 204, 0, 0.4); } 70% { box-shadow: 0 0 0 10px rgba(255, 204, 0, 0); } 100% { box-shadow: 0 0 0 0 rgba(255, 204, 0, 0); } }
 
-  @keyframes textPulse {
-    from { text-shadow: 4px 4px 0 #3a1a0d, 0 0 10px var(--primary-glow); }
-    to { text-shadow: 4px 4px 0 #3a1a0d, 0 0 25px var(--primary-glow); }
-  }
-
-  @keyframes pulse {
-    0% { opacity: 0.7; }
-    50% { opacity: 1; }
-    100% { opacity: 0.7; }
-  }
 
   /* RESPONSIVE */
   @media (max-width: 600px) {

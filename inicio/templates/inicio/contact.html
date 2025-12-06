@@ -4,20 +4,21 @@
 {% block content %}
 
 <div class="crt-overlay"></div>
+<div class="vignette"></div>
 
 <section class="contact-section">
   
   <div class="contact-header animate-fade-down">
-    <h1 class="title">CENTRO DE COMUNICACIONES</h1>
+    <h1 class="title glitch" data-text="CENTRO DE COMUNICACIONES">CENTRO DE COMUNICACIONES</h1>
     <p class="subtitle">
       ¿Dudas, sugerencias o quieres unirte a la rebelión?
-      <span class="highlight">Envíanos una transmisión cifrada.</span> 📡
+      <span class="highlight typing-effect">Envíanos una transmisión cifrada...</span> 📡
     </p>
   </div>
 
   {% if sent %}
     <div class="retro-alert success animate-pop">
-      <div class="alert-icon">✔</div>
+      <div class="alert-icon pulse-icon">✔</div>
       <div class="alert-content">
         <h2>TRANSMISIÓN EXITOSA</h2>
         <p>Mensaje recibido en la base. Cambio y fuera.</p>
@@ -27,8 +28,10 @@
 
   <div class="contact-grid">
     
-    <div class="retro-panel form-panel animate-fade-up">
-      <div class="panel-header-bar">NUEVO MENSAJE</div>
+    <div class="retro-panel form-panel animate-float">
+      <div class="panel-header-bar">
+        <span class="status-dot"></span> NUEVO MENSAJE
+      </div>
       
       <form method="post" novalidate>
         {% csrf_token %}
@@ -37,7 +40,7 @@
           <label for="id_name">IDENTIFICADOR (NOMBRE)</label>
           <div class="input-wrapper">
             {{ form.name }}
-            <div class="input-glow"></div>
+            <div class="input-border-anim"></div>
           </div>
         </div>
 
@@ -45,7 +48,7 @@
           <label for="id_email">FRECUENCIA (EMAIL)</label>
           <div class="input-wrapper">
             {{ form.email }}
-            <div class="input-glow"></div>
+            <div class="input-border-anim"></div>
           </div>
         </div>
 
@@ -53,13 +56,13 @@
           <label for="id_message">MENSAJE CIFRADO</label>
           <div class="input-wrapper">
             {{ form.message }}
-            <div class="input-glow"></div>
+            <div class="input-border-anim"></div>
           </div>
         </div>
 
         <button type="submit" class="btn-send">
-          <span>ENVIAR TRANSMISIÓN</span>
-          <i class="fas fa-satellite-dish"></i>
+          <span class="btn-content">ENVIAR TRANSMISIÓN</span>
+          <i class="fas fa-satellite-dish satellite-anim"></i>
         </button>
       </form>
       
@@ -69,26 +72,28 @@
       <div class="screw bottom-right"></div>
     </div>
 
-    <div class="retro-panel info-panel animate-fade-up" style="animation-delay: 0.2s;">
-      <div class="panel-header-bar">CANALES DIRECTOS</div>
+    <div class="retro-panel info-panel animate-float delay-float">
+      <div class="panel-header-bar">
+        <span class="status-dot blink-yellow"></span> CANALES DIRECTOS
+      </div>
       
       <ul class="contact-list">
-        <li>
-          <div class="icon-box"><i class="fas fa-envelope"></i></div>
+        <li class="stagger-item" style="--delay: 0.1s">
+          <div class="icon-box wobble-hover"><i class="fas fa-envelope"></i></div>
           <div class="info-text">
             <span class="label">EMAIL</span>
             <span class="value">contacto@facebomb.com</span>
           </div>
         </li>
-        <li>
-          <div class="icon-box"><i class="fas fa-phone-alt"></i></div>
+        <li class="stagger-item" style="--delay: 0.2s">
+          <div class="icon-box wobble-hover"><i class="fas fa-phone-alt"></i></div>
           <div class="info-text">
             <span class="label">LÍNEA SEGURA</span>
             <span class="value">+52 555 555 5555</span>
           </div>
         </li>
-        <li>
-          <div class="icon-box"><i class="fas fa-map-marker-alt"></i></div>
+        <li class="stagger-item" style="--delay: 0.3s">
+          <div class="icon-box wobble-hover"><i class="fas fa-map-marker-alt"></i></div>
           <div class="info-text">
             <span class="label">BASE DE OPERACIONES</span>
             <span class="value">Sector 9, UTM</span>
@@ -97,8 +102,10 @@
       </ul>
 
       <div class="map-placeholder">
-        <div class="scan-line"></div>
-        <span>[SEÑAL DE GPS NO DISPONIBLE]</span>
+        <div class="radar-sweep"></div>
+        <div class="grid-lines"></div>
+        <div class="target-dot"></div>
+        <span class="radar-text">[BÚSQUEDA DE SEÑAL GPS...]</span>
       </div>
     </div>
 
@@ -108,13 +115,13 @@
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Courier+Prime:wght@400;700&display=swap');
 
-  /* --- VARIABLES GLOBALES (Armonía Face-Bomb) --- */
+  /* --- VARIABLES --- */
   :root {
     --bg-dark: #140d0b;
     --bg-card: #1e120e;
-    --primary: #ffcc00;       /* Dorado */
+    --primary: #ffcc00;       
     --primary-glow: rgba(255, 204, 0, 0.5);
-    --secondary: #7B3B1D;     /* Cobre */
+    --secondary: #7B3B1D;     
     --text-main: #dcb;
     --header-font: "Press Start 2P", cursive;
     --body-font: "Courier Prime", monospace;
@@ -125,6 +132,7 @@
 
   body {
     background-color: var(--bg-dark);
+    /* Patrón sutil */
     background-image: 
       linear-gradient(rgba(123, 59, 29, 0.05) 1px, transparent 1px),
       linear-gradient(90deg, rgba(123, 59, 29, 0.05) 1px, transparent 1px);
@@ -133,6 +141,7 @@
     color: var(--text-main);
     margin: 0; padding: 0;
     min-height: 100vh;
+    overflow-x: hidden;
   }
 
   /* Scanlines CRT */
@@ -141,42 +150,51 @@
     background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%);
     background-size: 100% 4px;
     pointer-events: none; z-index: 0; opacity: 0.15;
-    animation: scrollScanlines 10s linear infinite;
+    animation: scrollScanlines 8s linear infinite;
+  }
+
+  /* Viñeta oscura en bordes */
+  .vignette {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: radial-gradient(circle, transparent 60%, #000 100%);
+    pointer-events: none; z-index: 1; opacity: 0.6;
   }
 
   .contact-section {
     position: relative;
-    z-index: 1;
+    z-index: 2;
     padding: 3rem 1rem;
     max-width: 1000px;
     margin: 0 auto;
   }
 
-  /* --- HEADER --- */
-  .contact-header {
-    text-align: center;
-    margin-bottom: 3rem;
-  }
+  /* --- HEADER & GLITCH --- */
+  .contact-header { text-align: center; margin-bottom: 3rem; }
 
   .title {
     font-family: var(--header-font);
     font-size: 1.5rem;
     color: var(--primary);
-    text-shadow: 3px 3px 0 #3a1a0d, 0 0 15px var(--primary-glow);
+    text-shadow: 3px 3px 0 #3a1a0d;
     margin-bottom: 1rem;
     text-transform: uppercase;
-    animation: textPulse 3s infinite alternate;
+    position: relative;
+    display: inline-block;
   }
 
-  .subtitle {
-    font-size: 0.9rem;
-    color: #cbb;
-    max-width: 700px;
-    margin: 0 auto;
-    line-height: 1.6;
+  /* Efecto Glitch */
+  .glitch:hover {
+    animation: glitch-anim 0.3s cubic-bezier(.25, .46, .45, .94) both infinite;
+    color: #fff;
   }
+  .glitch:hover::before, .glitch:hover::after {
+    display: block; content: attr(data-text); position: absolute; top: 0; left: 0; opacity: 0.8;
+  }
+  .glitch:hover::before { color: #0ff; z-index: -1; transform: translate(-2px, -2px); }
+  .glitch:hover::after { color: #f0f; z-index: -2; transform: translate(2px, 2px); }
 
-  .highlight { color: var(--primary); font-weight: bold; }
+  .subtitle { font-size: 0.9rem; color: #cbb; max-width: 700px; margin: 0 auto; line-height: 1.6; }
+  .highlight { color: var(--primary); font-weight: bold; border-bottom: 1px dashed var(--primary); }
 
   /* --- GRID --- */
   .contact-grid {
@@ -190,13 +208,14 @@
     background: var(--bg-card);
     border: 3px solid var(--secondary);
     border-radius: 8px;
-    box-shadow: 
-      0 10px 25px rgba(0,0,0,0.6),
-      inset 0 0 40px rgba(0,0,0,0.3);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.6), inset 0 0 40px rgba(0,0,0,0.3);
     position: relative;
-    display: flex;
-    flex-direction: column;
+    display: flex; flex-direction: column;
   }
+
+  /* Flotación suave */
+  .animate-float { animation: floatPanel 6s ease-in-out infinite; }
+  .delay-float { animation-delay: 3s; }
 
   .panel-header-bar {
     background: rgba(0,0,0,0.3);
@@ -207,13 +226,30 @@
     font-size: 0.7rem;
     color: var(--secondary);
     letter-spacing: 1px;
+    display: flex; align-items: center; justify-content: center; gap: 8px;
   }
 
-  /* Tornillos */
-  .screw {
-    position: absolute; width: 8px; height: 8px;
-    background: #4a2311; border-radius: 50%; box-shadow: inset 1px 1px 1px rgba(255,255,255,0.2);
+  .status-dot {
+    width: 8px; height: 8px; background: var(--success); border-radius: 50%;
+    box-shadow: 0 0 5px var(--success);
+    animation: blink 2s infinite;
   }
+  .status-dot.blink-yellow { background: var(--primary); box-shadow: 0 0 5px var(--primary); }
+
+  /* Tornillos giratorios */
+  .screw {
+    position: absolute; width: 10px; height: 10px;
+    background: #4a2311; border-radius: 50%; 
+    box-shadow: inset 1px 1px 1px rgba(255,255,255,0.2);
+    border: 1px solid #221;
+    /* Cruz del tornillo */
+    display: flex; align-items: center; justify-content: center;
+  }
+  .screw::after { content: '+'; font-family: monospace; color: #221; font-size: 10px; line-height: 10px; }
+  
+  /* Animación de apriete lento */
+  .form-panel:hover .screw { animation: screwTurn 1s ease-out; }
+
   .top-left { top: 10px; left: 10px; }
   .top-right { top: 10px; right: 10px; }
   .bottom-left { bottom: 10px; left: 10px; }
@@ -221,141 +257,124 @@
 
   /* --- FORMULARIO --- */
   .form-panel { padding: 2rem; }
-
-  .form-group { margin-bottom: 1.5rem; text-align: left; }
+  .form-group { margin-bottom: 1.5rem; text-align: left; position: relative; }
 
   label {
-    display: block;
-    color: var(--primary);
-    font-size: 0.6rem;
-    margin-bottom: 0.5rem;
-    text-transform: uppercase;
-    text-shadow: 1px 1px 0 #000;
-    font-family: var(--header-font);
+    display: block; color: var(--primary); font-size: 0.6rem; margin-bottom: 0.5rem;
+    text-transform: uppercase; text-shadow: 1px 1px 0 #000; font-family: var(--header-font);
   }
 
+  .input-wrapper { position: relative; }
+
   input, textarea {
-    width: 100%;
-    padding: 12px;
-    border: 2px solid var(--secondary);
-    border-radius: 4px;
-    background: #0a0503;
-    color: #fff;
-    font-family: var(--body-font);
-    font-weight: bold;
-    font-size: 0.9rem;
-    box-sizing: border-box;
-    transition: all 0.3s ease;
+    width: 100%; padding: 12px;
+    border: 2px solid var(--secondary); border-radius: 4px;
+    background: #0a0503; color: #fff;
+    font-family: var(--body-font); font-weight: bold; font-size: 0.9rem;
+    box-sizing: border-box; transition: all 0.3s ease;
     box-shadow: inset 2px 2px 5px rgba(0,0,0,0.5);
   }
 
-  input:focus, textarea:focus {
-    outline: none;
-    border-color: var(--primary);
-    box-shadow: 0 0 10px var(--primary-glow);
-    background: #140a05;
+  /* Animación de borde al enfocar */
+  .input-border-anim {
+    position: absolute; bottom: 0; left: 50%; width: 0; height: 2px;
+    background: var(--primary);
+    transition: all 0.4s ease;
+    transform: translateX(-50%);
   }
-
+  input:focus ~ .input-border-anim, textarea:focus ~ .input-border-anim { width: 100%; box-shadow: 0 0 10px var(--primary); }
+  
+  input:focus, textarea:focus { outline: none; border-color: var(--secondary); background: #140a05; }
   textarea { min-height: 120px; resize: vertical; }
 
   /* BOTÓN */
   .btn-send {
     background: linear-gradient(180deg, var(--btn-grad-start) 0%, var(--btn-grad-end) 100%);
-    color: #2e0e05;
-    border: none;
-    padding: 1rem;
-    border-radius: 6px;
-    width: 100%;
-    font-size: 0.8rem;
-    font-family: var(--header-font);
-    cursor: pointer;
-    font-weight: bold;
+    color: #2e0e05; border: none; padding: 1rem;
+    border-radius: 6px; width: 100%;
+    font-size: 0.8rem; font-family: var(--header-font);
+    cursor: pointer; font-weight: bold;
     box-shadow: 0 6px 0 #993300, 0 10px 20px rgba(0,0,0,0.4);
     transition: transform 0.1s;
     text-transform: uppercase;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
+    display: flex; justify-content: center; align-items: center; gap: 10px;
+    position: relative; overflow: hidden;
   }
 
-  .btn-send:active {
-    transform: translateY(4px);
-    box-shadow: 0 2px 0 #993300;
+  /* Brillo que pasa por el botón */
+  .btn-send::before {
+    content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+    transition: 0.5s;
   }
+  .btn-send:hover::before { left: 100%; }
+
+  .btn-send:active { transform: translateY(4px); box-shadow: 0 2px 0 #993300; }
+  .satellite-anim { transition: transform 0.3s; }
+  .btn-send:hover .satellite-anim { transform: rotate(-20deg) scale(1.2); }
 
   /* --- INFO PANEL --- */
   .info-panel { padding: 0; }
-
-  .contact-list {
-    list-style: none;
-    padding: 2rem;
-    margin: 0;
-  }
-
-  .contact-list li {
-    display: flex;
-    align-items: center;
-    margin-bottom: 1.5rem;
+  .contact-list { list-style: none; padding: 2rem; margin: 0; }
+  
+  .stagger-item {
+    display: flex; align-items: center; margin-bottom: 1.5rem;
+    opacity: 0; animation: slideInLeft 0.5s ease-out forwards;
+    animation-delay: var(--delay);
   }
 
   .icon-box {
-    width: 40px; height: 40px;
-    background: #0f0806;
+    width: 40px; height: 40px; background: #0f0806;
     border: 1px solid var(--secondary);
     display: flex; align-items: center; justify-content: center;
-    border-radius: 4px;
-    margin-right: 15px;
-    color: var(--primary);
-    font-size: 1.2rem;
-    box-shadow: 0 0 10px rgba(123, 59, 29, 0.2);
+    border-radius: 4px; margin-right: 15px; color: var(--primary);
+    font-size: 1.2rem; box-shadow: 0 0 10px rgba(123, 59, 29, 0.2);
+    transition: transform 0.3s;
   }
+  
+  .wobble-hover:hover { animation: wobble 0.8s both; border-color: var(--primary); color: #fff; }
 
-  .info-text {
-    display: flex; flex-direction: column;
-  }
+  .info-text { display: flex; flex-direction: column; }
+  .info-text .label { font-size: 0.6rem; color: #865; font-weight: bold; margin-bottom: 2px; }
+  .info-text .value { color: #fff; font-size: 0.9rem; }
 
-  .info-text .label {
-    font-size: 0.6rem;
-    color: #865;
-    font-weight: bold;
-    margin-bottom: 2px;
-  }
-
-  .info-text .value {
-    color: #fff;
-    font-size: 0.9rem;
-  }
-
-  /* MAPA PLACEHOLDER (Radar) */
+  /* RADAR */
   .map-placeholder {
-    background: #000;
-    height: 150px;
-    margin: 0 20px 20px;
-    border: 2px solid var(--secondary);
-    border-radius: 4px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--secondary);
-    font-family: var(--header-font);
-    font-size: 0.5rem;
-    position: relative;
-    overflow: hidden;
+    background: #000; height: 150px; margin: 0 20px 20px;
+    border: 2px solid var(--secondary); border-radius: 4px;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--secondary); font-family: var(--header-font); font-size: 0.5rem;
+    position: relative; overflow: hidden;
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.8);
   }
 
-  .scan-line {
-    position: absolute;
-    width: 100%; height: 2px;
-    background: var(--secondary);
-    top: 0;
-    animation: scanRadar 3s linear infinite;
-    box-shadow: 0 0 5px var(--secondary);
+  /* Barrido de radar circular */
+  .radar-sweep {
+    position: absolute; width: 100%; height: 100%;
+    background: conic-gradient(from 0deg, transparent 0deg, rgba(123, 59, 29, 0.1) 60deg, rgba(255, 204, 0, 0.4) 90deg, transparent 91deg);
+    border-radius: 50%;
+    animation: radarSpin 4s linear infinite;
+    top: -50%; left: -50%; width: 200%; height: 200%; /* Cubrir el rectángulo */
   }
+
+  .grid-lines {
+    position: absolute; width: 100%; height: 100%;
+    background-image: radial-gradient(var(--secondary) 1px, transparent 1px);
+    background-size: 20px 20px; opacity: 0.3;
+  }
+
+  .target-dot {
+    width: 6px; height: 6px; background: var(--primary); border-radius: 50%;
+    position: absolute; top: 40%; left: 60%;
+    box-shadow: 0 0 5px var(--primary);
+    animation: blink 1s infinite;
+  }
+  
+  .radar-text { position: relative; z-index: 2; background: rgba(0,0,0,0.6); padding: 2px 5px; }
 
   /* --- ALERTAS --- */
   .retro-alert.success {
-    background: rgba(0, 40, 20, 0.9);
+    background: rgba(0, 40, 20, 0.95);
     border: 2px solid var(--success);
     color: #aaffcc;
     padding: 1rem;
@@ -366,37 +385,44 @@
     gap: 15px;
     box-shadow: 0 0 20px rgba(0, 255, 136, 0.2);
   }
+  .alert-icon { font-size: 2rem; color: var(--success); }
+  .pulse-icon { animation: pulse 1.5s infinite; }
 
-  .alert-icon {
-    font-size: 2rem;
-    color: var(--success);
-  }
-
-  .alert-content h2 {
-    font-family: var(--header-font);
-    font-size: 0.8rem;
-    margin: 0 0 5px 0;
-    color: var(--success);
-  }
-  .alert-content p { margin: 0; font-size: 0.8rem; }
-
-  /* --- ANIMACIONES --- */
+  /* --- KEYFRAMES --- */
   @keyframes scrollScanlines { from { background-position: 0 0; } to { background-position: 0 100%; } }
+  @keyframes textPulse { from { text-shadow: 3px 3px 0 #3a1a0d; } to { text-shadow: 3px 3px 0 #3a1a0d, 0 0 15px var(--primary-glow); } }
+  @keyframes radarSpin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+  @keyframes screwTurn { from { transform: rotate(0deg); } to { transform: rotate(180deg); } }
+  @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+  @keyframes floatPanel { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+  @keyframes slideInLeft { from { opacity: 0; transform: translateX(-20px); } to { opacity: 1; transform: translateX(0); } }
   
-  @keyframes textPulse {
-    from { text-shadow: 3px 3px 0 #3a1a0d, 0 0 10px var(--primary-glow); }
-    to { text-shadow: 3px 3px 0 #3a1a0d, 0 0 25px var(--primary-glow); }
+  @keyframes wobble {
+    0%, 100% { transform: translateX(0%); transform-origin: 50% 50%; }
+    15% { transform: translateX(-4px) rotate(-4deg); }
+    30% { transform: translateX(3px) rotate(3deg); }
+    45% { transform: translateX(-3px) rotate(-2.4deg); }
+    60% { transform: translateX(2px) rotate(1.2deg); }
+    75% { transform: translateX(-1px) rotate(-1deg); }
   }
 
-  @keyframes scanRadar { 0% { top: 0; } 100% { top: 100%; } }
+  /* Glitch Animations */
+  @keyframes glitch-anim {
+    0% { transform: translate(0); }
+    20% { transform: translate(-2px, 2px); }
+    40% { transform: translate(-2px, -2px); }
+    60% { transform: translate(2px, 2px); }
+    80% { transform: translate(2px, -2px); }
+    100% { transform: translate(0); }
+  }
 
-  @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+  .animate-fade-down { animation: fadeInDown 0.8s ease-out; }
+  .animate-fade-up { animation: fadeInUp 0.8s ease-out; }
+  .animate-pop { animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+
   @keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
-  @keyframes popIn { 0% { opacity: 0; transform: scale(0.9); } 100% { opacity: 1; transform: scale(1); } }
-
-  .animate-fade-up { animation: fadeInUp 0.6s ease-out both; }
-  .animate-fade-down { animation: fadeInDown 0.6s ease-out both; }
-  .animate-pop { animation: popIn 0.4s ease-out both; }
+  @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes popIn { 0% { opacity: 0; transform: scale(0.8); } 100% { opacity: 1; transform: scale(1); } }
 
   /* RESPONSIVE */
   @media (max-width: 768px) {
